@@ -1,4 +1,3 @@
-% Needs tail recursion.
 merge_sort([], []).
 merge_sort([X], [X]).
 merge_sort([X,Y|Xs], Sorted) :-
