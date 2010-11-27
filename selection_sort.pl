@@ -1,15 +1,16 @@
-selection_sort([], []).
-selection_sort(L, [Min|Sorted]) :-
-  extract_min(L, Min, Rest),
-  selection_sort(Rest, Sorted).
+:- [check].
 
-extract_min([Min], Min, []).
-extract_min([X,Y|Xs], Min, [Big|Rest]) :-
-  min_max(X, Y, Small, Big),
-  extract_min([Small|Xs], Min, Rest).
+selection_sort([], _, []).
+selection_sort(L, Rel, [Extremum|Sorted]) :-
+    extract_extremum(L, Rel, Extremum, Rest),
+    selection_sort(Rest, Rel, Sorted).
 
-min_max(Min, Max, Min, Max) :-
-  Min @< Max,
-  !.
-min_max(Max, Min, Min, Max).
-  % Max @>= Min.
+extract_extremum([Extremum], _, Extremum, []).
+extract_extremum([X,Y|Xs], Rel, Extremum, [Other|Others]) :-
+    relate(X, Y, Rel, Extremum0, Other),
+    extract_extremum([Extremum0|Xs], Rel, Extremum, Others).
+
+relate(Winner, Loser, Rel, Winner, Loser) :-
+    check(Rel, Winner, Loser).
+relate(Loser, Winner, Rel, Winner, Loser) :-
+    \+check(Rel, Loser, Winner).

@@ -1,15 +1,16 @@
-insertion_sort(L, S) :-
-  insertion_sort(L, [], S).
+:- [check].
 
-insertion_sort([], Sorted, Sorted).
-insertion_sort([X|Xs], Sorted0, Sorted) :-
-  ordered_insert(Sorted0, X, Sorted1),
-  insertion_sort(Xs, Sorted1, Sorted).
+insertion_sort(L, Rel, S) :-
+    insertion_sort(L, Rel, [], S).
 
-ordered_insert([], X, [X]).
-ordered_insert([Y|Ys], X, [X,Y|Ys]) :-
-  X @< Y,
-  !.
-ordered_insert([Y|Ys], X, [Y|L]) :-
-  % X @>= Y,
-  ordered_insert(Ys, X, L).
+insertion_sort([], _, Sorted, Sorted).
+insertion_sort([X|Xs], Rel, Sorted0, Sorted) :-
+    ordered_insert(Sorted0, X, Rel, Sorted1),
+    insertion_sort(Xs, Rel, Sorted1, Sorted).
+
+ordered_insert([], X, _, [X]).
+ordered_insert([Y|Ys], X, Rel, [X,Y|Ys]) :-
+    check(Rel, X, Y).
+ordered_insert([Y|Ys], X, Rel, [Y|L]) :-
+    \+check(Rel, X, Y),
+    ordered_insert(Ys, X, Rel, L).
