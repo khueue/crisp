@@ -1,4 +1,4 @@
-:- [check].
+:- [sort_utils].
 
 merge_sort([], _, []).
 merge_sort([X], _, [X]).

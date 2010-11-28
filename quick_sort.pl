@@ -1,4 +1,4 @@
-:- [check].
+:- [sort_utils].
 
 quick_sort(L, Rel, S) :-
     quick_sort(L, Rel, [], S).

@@ -1,1 +1,1 @@
-conc(A-B, B-C, A-C).
+conc(Xs-Ys, Ys-Zs, Xs-Zs).

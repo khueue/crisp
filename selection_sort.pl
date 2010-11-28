@@ -1,4 +1,4 @@
-:- [check].
+:- [sort_utils].
 
 selection_sort([], _, []).
 selection_sort(L, Rel, [Extremum|Sorted]) :-

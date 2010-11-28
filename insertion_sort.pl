@@ -1,4 +1,4 @@
-:- [check].
+:- [sort_utils].
 
 insertion_sort(L, Rel, S) :-
     insertion_sort(L, Rel, [], S).
