@@ -10,7 +10,8 @@ insertion_sort([X|Xs], Rel, Sorted0, Sorted) :-
 
 ordered_insert([], X, _, [X]).
 ordered_insert([Y|Ys], X, Rel, [X,Y|Ys]) :-
-    check(Rel, X, Y).
+    check(Rel, X, Y),
+    !.
 ordered_insert([Y|Ys], X, Rel, [Y|L]) :-
-    \+check(Rel, X, Y),
+    % \+check(Rel, X, Y),
     ordered_insert(Ys, X, Rel, L).
