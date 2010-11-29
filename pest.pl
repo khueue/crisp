@@ -4,7 +4,7 @@
  * t/0 clauses!
  */
 
-:- multifile t/0.
+:- multifile test/2.
 
 /***************************************************************************
  * Ignore warnings about t/0 (and any other predicates) not being defined
@@ -13,38 +13,29 @@
 
 :- set_prolog_flag(discontiguous_warnings, off).
 
-/***************************************************************************
- * ?- test.
- *
- * Runs all tests. Always succeeds.
- */
 
 test :-
     write('Started testing.'), nl, nl,
-    findall(t(TestName,Goals), t(TestName,Goals), Tests),
-    run_unit_tests(Tests), nl,
+    collect_and_run, nl,
     write('Finished testing.'), nl.
 
-run_unit_tests([]).
-run_unit_tests([t(Label,Goals)|Tests]) :-
-    write('--- Testing: '), write(Label), nl,
+collect_and_run :-
+    findall(test(Name,Goals), test(Name,Goals), Tests),
+    run_all_tests(Tests).
+
+run_all_tests([]).
+run_all_tests([test(Name,Goals)|Tests]) :-
+    write('--- '), write(Name), nl,
     run_tests(Goals),
-    run_unit_tests(Tests).
+    run_all_tests(Tests).
 
 run_tests([]).
 run_tests([Goal|Goals]) :-
     run_test(Goal),
     run_tests(Goals).
 
-/***************************************************************************
- * ?- t(+Goal).
- *
- * Calls Goal and does nothing if it succeeds.
- * Prints a message if Goal fails.
- */
-
 run_test(Goal) :-
-    Goal,
+    call(Goal),
     !.
 run_test(Goal) :-
-    write('    >>> FAILED: '), write(Goal), nl.
+    write('    >>> FAIL: '), write(Goal), nl.
