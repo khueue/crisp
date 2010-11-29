@@ -1,3 +1,5 @@
+:- [pest].
+
 fib(N, Fib) :-
     fib(N, 0, 1, Fib).
 
