@@ -13,6 +13,9 @@
 
 :- set_prolog_flag(discontiguous_warnings, off).
 
+%%  XXX
+%
+%   XXXXXX
 
 test :-
     write('Started testing.'), nl, nl,
