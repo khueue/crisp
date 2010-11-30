@@ -15,7 +15,7 @@
 
 :- set_prolog_flag(discontiguous_warnings, off).
 
-crisp_version('1.0.0').
+crisp_version('0.0.1').
 
 %%  XXX
 %
