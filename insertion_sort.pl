@@ -29,7 +29,7 @@ insertion_sort([X|Xs], Rel, Sorted0, Sorted) :-
 
 test(insertion_sort/4, Goals) :-
     Goals = [ true
-    , fail
+    , true
     ].
 
 %%  XXX

@@ -29,20 +29,27 @@ collect_and_run :-
 run_all_tests([]).
 run_all_tests([test(Name,Goals)|Tests]) :-
     write('--- '), write(Name), nl,
-    run_tests(Goals, 0, Pass, 0, Fail),
-    Total is Pass + Fail,
-    write('pass: '), write(Pass), write('/'), write(Total), nl,
+    run_tests(Goals, stats(0,0,0), stats(Pass,Fail,Total)),
+    write('    Fail: '), write(Fail/Total),
+    write(', Pass: '), write(Pass/Total), nl,
     run_all_tests(Tests).
 
-run_tests([], Pass, Pass, Fail, Fail).
-run_tests([Goal|Goals], Pass0, Pass, Fail0, Fail) :-
-    run_test(Goal, Pass0, Pass1, Fail0, Fail1),
-    run_tests(Goals, Pass1, Pass, Fail1, Fail).
+run_tests([], Stats, Stats).
+run_tests([Goal|Goals], Stats0, Stats) :-
+    run_test(Goal, Result),
+    update_stats(Result, Stats0, Stats1),
+    run_tests(Goals, Stats1, Stats).
 
-run_test(Goal, Pass0, Pass, Fail, Fail) :-
+run_test(Goal, pass) :-
     call(Goal),
-    !,
-    Pass is Pass0 + 1.
-run_test(Goal, Pass, Pass, Fail0, Fail) :-
-    write('    >>> FAIL: '), write(Goal), nl,
-    Fail is Fail0 + 1.
+    !.
+run_test(Goal, fail) :-
+    % \+call(Goal),
+    write('    >>> FAIL: '), write(Goal), nl.
+
+update_stats(pass, stats(Pass0,Fail,Total0), stats(Pass,Fail,Total)) :-
+    Pass is Pass0 + 1,
+    Total is Total0 + 1.
+update_stats(fail, stats(Pass,Fail0,Total0), stats(Pass,Fail,Total)) :-
+    Fail is Fail0 + 1,
+    Total is Total0 + 1.
