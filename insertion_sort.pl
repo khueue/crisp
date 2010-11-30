@@ -46,8 +46,8 @@ ordered_insert([Y|Ys], X, Rel, [Y|L]) :-
 
 test(ordered_insert/4, Goals) :-
     Goals = [ true
-    , ordered_insert([],    1, _, [1])
+    , ordered_insert([], 1, _, [1])
     , ordered_insert([1,3], 2, <, [1,2,3])
-    , ordered_insert([1],   2, <, [1,2])
-    , ordered_insert([1],   2, >, [2,1])
+    , ordered_insert([1], 2, <, [1,2])
+    , ordered_insert([1], 2, >, [2,1])
     ].

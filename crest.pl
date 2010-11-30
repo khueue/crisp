@@ -18,8 +18,8 @@
 %   XXXXXX
 
 test :-
-    write('Started testing.'), nl, nl,
-    collect_and_run, nl,
+    write('Started testing.'), nl,
+    nl, collect_and_run, nl,
     write('Finished testing.'), nl.
 
 collect_and_run :-
@@ -29,16 +29,20 @@ collect_and_run :-
 run_all_tests([]).
 run_all_tests([test(Name,Goals)|Tests]) :-
     write('--- '), write(Name), nl,
-    run_tests(Goals),
+    run_tests(Goals, 0, Pass, 0, Fail),
+    Total is Pass + Fail,
+    write('pass: '), write(Pass), write('/'), write(Total), nl,
     run_all_tests(Tests).
 
-run_tests([]).
-run_tests([Goal|Goals]) :-
-    run_test(Goal),
-    run_tests(Goals).
+run_tests([], Pass, Pass, Fail, Fail).
+run_tests([Goal|Goals], Pass0, Pass, Fail0, Fail) :-
+    run_test(Goal, Pass0, Pass1, Fail0, Fail1),
+    run_tests(Goals, Pass1, Pass, Fail1, Fail).
 
-run_test(Goal) :-
+run_test(Goal, Pass0, Pass, Fail, Fail) :-
     call(Goal),
-    !.
-run_test(Goal) :-
-    write('    >>> FAIL: '), write(Goal), nl.
+    !,
+    Pass is Pass0 + 1.
+run_test(Goal, Pass, Pass, Fail0, Fail) :-
+    write('    >>> FAIL: '), write(Goal), nl,
+    Fail is Fail0 + 1.
