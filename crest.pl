@@ -23,28 +23,46 @@ test :-
     write('Finished testing.'), nl.
 
 collect_and_run :-
-    findall(test(Name,Goals), test(Name,Goals), Tests),
-    run_all_tests(Tests).
+    test(Name, Goals),
+    run_all_tests(Name, Goals),
+    fail.
+collect_and_run.
+    % No more tests.
 
-run_all_tests([]).
-run_all_tests([test(Name,Goals)|Tests]) :-
-    write('--- '), write(Name), nl,
-    run_tests(Goals, stats(0,0,0), stats(Pass,Fail,Total)),
-    write('    Fail: '), write(Fail/Total),
-    write(', Pass: '), write(Pass/Total), nl,
-    run_all_tests(Tests).
+run_all_tests(Name, Goals) :-
+    write(Name), write(':'), nl,
+    run_tests(Goals, stats(0,0,0), Stats),
+    write_stats(Stats).
+
+write_stats(Stats) :-
+    write('    '), write_fail(Stats),
+    write(', '), write_pass(Stats),
+    nl.
+
+write_fail(stats(_,Fail,Total)) :-
+    write('Fail: '), write(Fail/Total).
+
+write_pass(stats(Pass,_,Total)) :-
+    write('Pass: '), write(Pass/Total).
 
 run_tests([], Stats, Stats).
+/*run_tests(['true'|Goals], Stats, Stats) :-
+    !,
+    run_tests(Goals, Stats, Stats).*/
 run_tests([Goal|Goals], Stats0, Stats) :-
     run_test(Goal, Result),
+    write_result(Goal, Result),
     update_stats(Result, Stats0, Stats1),
     run_tests(Goals, Stats1, Stats).
 
 run_test(Goal, pass) :-
     call(Goal),
     !.
-run_test(Goal, fail) :-
-    % \+call(Goal),
+run_test(Goal, fail).
+    % Goal failed.
+
+write_result(_, pass) :- !.
+write_result(Goal, fail) :-
     write('    >>> FAIL: '), write(Goal), nl.
 
 update_stats(pass, stats(Pass0,Fail,Total0), stats(Pass,Fail,Total)) :-
