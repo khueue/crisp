@@ -50,4 +50,5 @@ test(ordered_insert/4, Goals) :-
     , ordered_insert([1,3], 2, <, [1,2,3])
     , ordered_insert([1], 2, <, [1,2])
     , ordered_insert([1], 2, >, [2,1])
+    , (ordered_insert([1], 2, >, S), S = [2,1])
     ].
