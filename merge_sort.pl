@@ -1,8 +1,8 @@
 :- [sort_utils].
 
-%%  XXX
+%% XXX
 %
-%   XXXXXX
+% XXXXXX
 
 merge_sort([], _, []) :- !.
 merge_sort([X], _, [X]) :- !.
@@ -12,18 +12,18 @@ merge_sort([X,Y|Xs], Rel, Sorted) :-
     merge_sort(L2, Rel, S2),
     merge(S1, S2, Rel, Sorted).
 
-%%  XXX
+%% XXX
 %
-%   XXXXXX
+% XXXXXX
 
 split([], [], []) :- !.
 split([X], [X], []) :- !.
 split([X,Y|Xs], [X|L1], [Y|L2]) :-
     split(Xs, L1, L2).
 
-%%  XXX
+%% XXX
 %
-%   XXXXXX
+% XXXXXX
 
 merge([], Ys, _, Ys) :- !.
 merge(Xs, [], _, Xs) :- !.

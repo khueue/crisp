@@ -1,25 +1,21 @@
-%%  Crisp - Crazy simple unit testing in Prolog
-
-/***************************************************************************
- * Let t/0 be defined by several files instead of each file overwriting old
- * definitions. This is important and must be added to all files that have
- * t/0 clauses!
- */
-
-:- multifile test/2.
-
-/***************************************************************************
- * Ignore warnings about t/0 (and any other predicates) not being defined
- * together (they are split over many files).
- */
-
-:- set_prolog_flag(discontiguous_warnings, off).
+% Crisp - Crazy simple unit testing in Prolog
 
 crisp_version('0.0.1').
 
-%%  XXX
+% Let test/2 be defined by several files instead of each file overwriting old
+% definitions. With SICStus, I believe this must be added to all files that
+% have test/2 clauses.
+
+:- multifile test/2.
+
+% Ignore warnings about test/2 (and any other predicates!) not being defined
+% together (split over many files).
+
+:- set_prolog_flag(discontiguous_warnings, off).
+
+%% XXX
 %
-%   XXXXXX
+% XXXXXX
 
 test :-
     crisp_version(Version),

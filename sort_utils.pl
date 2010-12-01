@@ -1,6 +1,6 @@
-%%  XXX
+%% XXX
 %
-%   XXXXXX
+% XXXXXX
 
 check(Rel, X, Y) :-
     Goal =.. [Rel,X,Y],

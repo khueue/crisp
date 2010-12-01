@@ -1,9 +1,9 @@
 :- [sort_utils].
 
-%%  insertion_sort(+List, +Relation, ?SortedList)
+%% insertion_sort(+List, +Relation, ?SortedList)
 %
-%   True if SortedList is List ordered according to the
-%   binary relation given by Relation.
+% True if SortedList is the elements in List and Relation(X, Y) is true for
+% any two consecutive X, Y.
 
 insertion_sort(L, Rel, S) :-
     insertion_sort(L, Rel, [], S).
@@ -18,9 +18,9 @@ test(insertion_sort/3, Goals) :-
     , insertion_sort([1,2,3], >, [3,2,1])
     ].
 
-%%  XXX
+%% XXX
 %
-%   XXXXXX
+% XXXXXX
 
 insertion_sort([], _, Sorted, Sorted).
 insertion_sort([X|Xs], Rel, Sorted0, Sorted) :-
@@ -32,9 +32,9 @@ test(insertion_sort/4, Goals) :-
     , true
     ].
 
-%%  XXX
+%% XXX
 %
-%   XXXXXX
+% XXXXXX
 
 ordered_insert([], X, _, [X]).
 ordered_insert([Y|Ys], X, Rel, [X,Y|Ys]) :-

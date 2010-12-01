@@ -1,13 +1,13 @@
-%%  XXX
+%% XXX
 %
-%   XXXXXX
+% XXXXXX
 
 fib(N, Fib) :-
     fib(N, 0, 1, Fib).
 
-%%  XXX
+%% XXX
 %
-%   XXXXXX
+% XXXXXX
 
 fib(0, Fib, _, Fib).
 fib(N, F0, F1, Fib) :-

@@ -1,15 +1,15 @@
 :- [sort_utils].
 
-%%  XXX
+%% XXX
 %
-%   XXXXXX
+% XXXXXX
 
 quick_sort(L, Rel, S) :-
     quick_sort(L, Rel, [], S).
 
-%%  XXX
+%% XXX
 %
-%   XXXXXX
+% XXXXXX
 
 quick_sort([], _, Sorted, Sorted).
 quick_sort([P|Xs], Rel, Sorted0, Sorted) :-
@@ -17,9 +17,9 @@ quick_sort([P|Xs], Rel, Sorted0, Sorted) :-
     quick_sort(Right, Rel, Sorted0, Right1),
     quick_sort(Left, Rel, [P|Right1], Sorted).
 
-%%  XXX
+%% XXX
 %
-%   XXXXXX
+% XXXXXX
 
 partition([], _, _, [], []).
 partition([X|Xs], Rel, P, [X|Smalls], Bigs) :-
