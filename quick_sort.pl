@@ -12,7 +12,7 @@ test(quick_sort/3, Goals) :-
     , fail
     ].
 
-%% XXX
+% XXX
 %
 % XXXXXX
 
@@ -27,7 +27,7 @@ test(quick_sort/4, Goals) :-
     , fail
     ].
 
-%% XXX
+% XXX
 %
 % XXXXXX
 
