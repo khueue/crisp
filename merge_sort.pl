@@ -1,8 +1,9 @@
 :- [sort_utils].
 
-%% XXX
+%% merge_sort(+List, +Relation, ?SortedList)
 %
-% XXXXXX
+% True if SortedList is the elements in List such that Relation(A, B) is true
+% for any two consecutive elements A and B in SortedList.
 
 merge_sort([], _, []) :- !.
 merge_sort([X], _, [X]) :- !.
@@ -12,9 +13,16 @@ merge_sort([X,Y|Xs], Rel, Sorted) :-
     merge_sort(L2, Rel, S2),
     merge(S1, S2, Rel, Sorted).
 
-% XXX
-%
-% XXXXXX
+test(merge_sort/3, Goals) :-
+    Goals = [ true
+    , merge_sort([], <, [])
+    , (merge_sort([4,2,3,1,-1], <, S1), S1 = [-1,1,2,3,4])
+    , (merge_sort([4,2,3,1,-1], >=, S2), S2 = [4,3,2,1,-1])
+    , one(merge_sort([4,2,3,1,-1], >=, _))
+    ].
+
+% split(+List, ?PartList1, ?PartList2)
+% split(?List, +PartList1, +PartList2)
 
 split([], [], []) :- !.
 split([X], [X], []) :- !.
@@ -23,12 +31,15 @@ split([X,Y|Xs], [X|L1], [Y|L2]) :-
 
 test(split/3, Goals) :-
     Goals = [ true
-    , fail
+    , split([], [], [])
+    , split([1,2,3], [1,3], [2])
+    , split([1,2,3,4], [1,3], [2,4])
+    , (split([1,2,3,4], L1, L2), L1 = [1,3], L2 = [2,4])
+    , (split(L, [1,3], [2,4]), L = [1,2,3,4])
+    , one(split([1,2,3,4], _, _))
     ].
 
-% XXX
-%
-% XXXXXX
+% merge(+SortedList1, +SortedList2, +Relation, ?SortedList)
 
 merge([], Ys, _, Ys) :- !.
 merge(Xs, [], _, Xs) :- !.
@@ -42,5 +53,6 @@ merge([X|Xs], [Y|Ys], Rel, [Y|L]) :-
 
 test(merge/4, Goals) :-
     Goals = [ true
-    , fail
+    , merge([], [], <, [])
+    , merge([1,3,5], [2,4], <, [1,2,3,4,5])
     ].

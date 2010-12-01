@@ -2,8 +2,8 @@
 
 %% insertion_sort(+List, +Relation, ?SortedList)
 %
-% SortedList is the elements in List such that Relation(A, B) is true for any
-% two consecutive elements A and B in SortedList.
+% True if SortedList is the elements in List such that Relation(A, B) is true
+% for any two consecutive elements A and B in SortedList.
 
 insertion_sort(L, Rel, S) :-
     insertion_sort(L, Rel, [], S).

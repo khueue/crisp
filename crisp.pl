@@ -85,12 +85,24 @@ run_goals([], Stats, Stats).
 run_goals([true|Goals], Stats0, Stats) :-
     !,
     run_goals(Goals, Stats0, Stats).
+run_goals([one(Goal)|Goals], Stats0, Stats) :-
+    !,
+    execute_det_test(Goal, Result),
+    write_result(Goal, Result),
+    update_stats(Result, Stats0, Stats1),
+    run_goals(Goals, Stats1, Stats).
 run_goals([Goal|Goals], Stats0, Stats) :-
     % Goal \== true,
     execute_test(Goal, Result),
     write_result(Goal, Result),
     update_stats(Result, Stats0, Stats1),
     run_goals(Goals, Stats1, Stats).
+
+execute_det_test(Goal, pass) :-
+    findall(_, Goal, Solutions),
+    length(Solutions, 1),
+    !.
+execute_det_test(_Goal, fail).
 
 execute_test(Goal, pass) :-
     call(Goal),
