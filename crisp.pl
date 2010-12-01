@@ -85,7 +85,7 @@ run_goals([], Stats, Stats).
 run_goals([true|Goals], Stats0, Stats) :-
     !,
     run_goals(Goals, Stats0, Stats).
-run_goals([one(Goal)|Goals], Stats0, Stats) :-
+run_goals([one/Goal|Goals], Stats0, Stats) :-
     !,
     execute_det_test(Goal, Result),
     write_result(Goal, Result),
