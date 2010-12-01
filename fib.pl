@@ -5,7 +5,7 @@
 fib(N, Fib) :-
     fib(N, 0, 1, Fib).
 
-%% XXX
+% XXX
 %
 % XXXXXX
 

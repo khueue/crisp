@@ -29,7 +29,10 @@ insertion_sort([X|Xs], Rel, Sorted0, Sorted) :-
 
 test(insertion_sort/4, Goals) :-
     Goals = [ true
-    , true
+    , insertion_sort([], <, [], [])
+    , insertion_sort([3,2,1,4], <, [], [1,2,3,4])
+    , (insertion_sort([3,2,1], <, [4,5], S1), S1 = [1,2,3,4,5])
+    , (insertion_sort([3,2,1], <, [5,4], S2), S2 \== [1,2,3,4,5])
     ].
 
 %% XXX

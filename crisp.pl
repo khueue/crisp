@@ -1,6 +1,6 @@
 % Crisp - Crazy simple unit testing in Prolog
 
-crisp_version('0.0.1').
+crisp_version([0,0,1]).
 
 % Let test/2 be defined by several files instead of each file overwriting old
 % definitions. With SICStus, I believe this must be added to all files that
@@ -19,17 +19,24 @@ crisp_version('0.0.1').
 
 test :-
     crisp_version(Version),
-    write('Crisp '), write(Version), nl,
+    write('Crisp '), write_version(Version), nl,
     write('Started testing.'), nl,
     nl, collect_and_run, nl,
     write('Finished testing.'), nl.
 
+write_version([X]) :-
+    !,
+    write(X).
+write_version([X|Xs]) :-
+    write(X), write('.'),
+    write_version(Xs).
+
 collect_and_run :-
     findall(test(Name,Goals), test(Name,Goals), Tests),
     run_all_tests(Tests, stats(Pass,Fail)),
-    Total is Pass + Fail,
     nl,
     write('Summary: '),
+    Total is Pass + Fail,
     write(Fail/Total), write(' fail, '),
     write(Pass/Total), write(' pass'),
     nl.
@@ -60,15 +67,11 @@ update_global_stats(stats(Pass0,Fail0), stats(TestPass,TestFail), stats(Pass,Fai
 
 write_stats(stats(Pass,0)) :-
     !,
-    write(' ('),
-    write_pass(stats(Pass,0)),
-    write(')'),
-    nl.
+    write(' => '), write_pass(stats(Pass,0)), nl.
 write_stats(Stats) :-
     nl,
-    write('    ('), write_fail(Stats),
-    write(', '), write_pass(Stats), write(')'),
-    nl.
+    write('    => '), write_fail(Stats),
+    write(', '), write_pass(Stats), nl.
 
 write_pass(stats(Pass,Fail)) :-
     Total is Pass + Fail,
@@ -95,7 +98,7 @@ execute_test(Goal, pass) :-
 execute_test(_Goal, fail).
     % \+call(Goal).
 
-write_result(_, pass) :- !.
+write_result(_Goal, pass) :- !.
 write_result(Goal, fail) :-
     nl,
     write('    >>> FAIL: '), write(Goal).
