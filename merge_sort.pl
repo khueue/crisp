@@ -23,6 +23,8 @@ test(merge_sort/3, Goals) :-
 
 % split(+List, ?PartList1, ?PartList2)
 % split(?List, +PartList1, +PartList2)
+%
+% Splits a list into two lists of roughly equal length.
 
 split([], [], []) :- !.
 split([X], [X], []) :- !.
@@ -41,6 +43,8 @@ test(split/3, Goals) :-
     ].
 
 % merge(+SortedList1, +SortedList2, +Relation, ?SortedList)
+%
+% Merges two sorted lists into one, maintaining sort order.
 
 merge([], Ys, _, Ys) :- !.
 merge(Xs, [], _, Xs) :- !.

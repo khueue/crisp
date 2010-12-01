@@ -91,21 +91,21 @@ run_goals([one:Goal|Goals], Stats0, Stats) :-
     write_result(one:Goal, Result),
     update_stats(Result, Stats0, Stats1),
     run_goals(Goals, Stats1, Stats).
-run_goals([not:Goal|Goals], Stats0, Stats) :-
+run_goals([fail:Goal|Goals], Stats0, Stats) :-
     !,
     execute_test(\+(Goal), Result),
-    write_result(not:Goal, Result),
+    write_result(fail:Goal, Result),
     update_stats(Result, Stats0, Stats1),
     run_goals(Goals, Stats1, Stats).
 run_goals([Goal|Goals], Stats0, Stats) :-
-    % Goal \== true,
+    % Goal has no reserved form.
     execute_test(Goal, Result),
     write_result(Goal, Result),
     update_stats(Result, Stats0, Stats1),
     run_goals(Goals, Stats1, Stats).
 
 execute_det_test(Goal, pass) :-
-    findall(_, Goal, [_]),
+    findall(_, Goal, [_OnlyOne]),
     !.
 execute_det_test(_Goal, fail).
 
