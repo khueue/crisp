@@ -1,6 +1,8 @@
-%% XXX
+% Utilities used by sorting routines.
+
+%% check(+RelationPredicate, ?X, ?Y)
 %
-% XXXXXX
+% True if RelationPredicate(X, Y) is true.
 
 check(Rel, X, Y) :-
     Goal =.. [Rel,X,Y],

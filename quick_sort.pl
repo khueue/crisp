@@ -20,7 +20,7 @@ quick_sort([P|Xs], Rel, Sorted0, Sorted) :-
 %% XXX
 %
 % XXXXXX
-
+}}
 partition([], _, _, [], []).
 partition([X|Xs], Rel, P, [X|Smalls], Bigs) :-
     check(Rel, X, P),
