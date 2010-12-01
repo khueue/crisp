@@ -12,7 +12,7 @@ merge_sort([X,Y|Xs], Rel, Sorted) :-
     merge_sort(L2, Rel, S2),
     merge(S1, S2, Rel, Sorted).
 
-%% XXX
+% XXX
 %
 % XXXXXX
 
@@ -21,7 +21,12 @@ split([X], [X], []) :- !.
 split([X,Y|Xs], [X|L1], [Y|L2]) :-
     split(Xs, L1, L2).
 
-%% XXX
+test(split/3, Goals) :-
+    Goals = [ true
+    , fail
+    ].
+
+% XXX
 %
 % XXXXXX
 
@@ -32,5 +37,10 @@ merge([X|Xs], [Y|Ys], Rel, [X|L]) :-
     !,
     merge(Xs, [Y|Ys], Rel, L).
 merge([X|Xs], [Y|Ys], Rel, [Y|L]) :-
-    % \+check(Rel, X, Y),
+    % \+ check(Rel, X, Y),
     merge([X|Xs], Ys, Rel, L).
+
+test(merge/4, Goals) :-
+    Goals = [ true
+    , fail
+    ].

@@ -96,7 +96,7 @@ execute_test(Goal, pass) :-
     call(Goal),
     !.
 execute_test(_Goal, fail).
-    % \+call(Goal).
+    % \+ call(Goal).
 
 write_result(_Goal, pass) :- !.
 write_result(Goal, fail) :-
