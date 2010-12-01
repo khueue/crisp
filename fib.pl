@@ -7,7 +7,7 @@ fib(N, Fib) :-
 
 test(fib/2, Goals) :-
     Goals = [ true
-    , \+ fib(-1, _)
+    , not:fib(-1, _)
     , fib(0, 0)
     , fib(1, 1)
     , fib(2, 1)
@@ -28,7 +28,7 @@ fib(N, F0, F1, Fib) :-
 
 test(fib/4, Goals) :-
     Goals = [ true
-    , \+ fib(-1, _, _, _)
+    , not:fib(-1, _, _, _)
     , fib(0, 0, 1, 0)
     , fib(1, 0, 1, 1)
     , fib(2, 0, 1, 1)
