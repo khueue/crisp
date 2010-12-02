@@ -14,9 +14,9 @@ test(selection_sort/3, Goals) :-
     , fail
     ].
 
-% XXX
+% extract_extremum(+List, +Relation, ?Extremum, ?Others) XXX
 %
-% XXXXXX
+% Extracts the extremum value and all other elements from a list.
 
 extract_extremum([Extremum], _, Extremum, []) :- !.
 extract_extremum([X,Y|Xs], Rel, Extremum, [Other|Others]) :-
@@ -25,7 +25,8 @@ extract_extremum([X,Y|Xs], Rel, Extremum, [Other|Others]) :-
 
 test(extract_extremum/4, Goals) :-
     Goals = [ true
-    , fail
+    , extract_extremum([3], <, 3, [])
+    , extract_extremum([2,3,1], <, 1, [2,3])
     ].
 
 % XXX
