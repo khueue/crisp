@@ -2,9 +2,6 @@
 %
 % True if NthFib is the Nth Fibonacci number, starting with (0, 0) and (1, 1).
 
-fib(N, Fib) :-
-    fib(N, 0, 1, Fib).
-
 test(fib/2, Goals) :-
     Goals = [ true
     , fail:fib(-1, _)
@@ -17,14 +14,10 @@ test(fib/2, Goals) :-
     , fib(6, 8)
     ].
 
-% fib(+Nth, +ZerothFib, +FirstFib, ?NthFib)
+fib(N, Fib) :-
+    fib(N, 0, 1, Fib).
 
-fib(0, Fib, _, Fib) :- !.
-fib(N, F0, F1, Fib) :-
-    N > 0,
-    N1 is N - 1,
-    F2 is F0 + F1,
-    fib(N1, F1, F2, Fib).
+% fib(+Nth, +ZerothFib, +FirstFib, ?NthFib)
 
 test(fib/4, Goals) :-
     Goals = [ true
@@ -37,3 +30,10 @@ test(fib/4, Goals) :-
     , fib(5, 0, 1, 5)
     , fib(6, 0, 1, 8)
     ].
+
+fib(0, Fib, _, Fib) :- !.
+fib(N, F0, F1, Fib) :-
+    N > 0,
+    N1 is N - 1,
+    F2 is F0 + F1,
+    fib(N1, F1, F2, Fib).

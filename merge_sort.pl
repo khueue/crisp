@@ -5,14 +5,6 @@
 % True if SortedList is the elements in List such that Relation(A, B) is true
 % for any two consecutive elements A and B in SortedList.
 
-merge_sort([], _, []) :- !.
-merge_sort([X], _, [X]) :- !.
-merge_sort([X,Y|Xs], Rel, Sorted) :-
-    split([X,Y|Xs], L1, L2),
-    merge_sort(L1, Rel, S1),
-    merge_sort(L2, Rel, S2),
-    merge(S1, S2, Rel, Sorted).
-
 test(merge_sort/3, Goals) :-
     Goals = [ true
     , merge_sort([], <, [])
@@ -21,15 +13,18 @@ test(merge_sort/3, Goals) :-
     , one:merge_sort([4,2,3,1,-1], >=, _)
     ].
 
+merge_sort([], _, []) :- !.
+merge_sort([X], _, [X]) :- !.
+merge_sort([X,Y|Xs], Rel, Sorted) :-
+    split([X,Y|Xs], L1, L2),
+    merge_sort(L1, Rel, S1),
+    merge_sort(L2, Rel, S2),
+    merge(S1, S2, Rel, Sorted).
+
 % split(+List, ?PartList1, ?PartList2)
 % split(?List, +PartList1, +PartList2)
 %
 % Splits a list into two lists of roughly equal length.
-
-split([], [], []) :- !.
-split([X], [X], []) :- !.
-split([X,Y|Xs], [X|L1], [Y|L2]) :-
-    split(Xs, L1, L2).
 
 test(split/3, Goals) :-
     Goals = [ true
@@ -42,9 +37,20 @@ test(split/3, Goals) :-
     , one:split([1,2,3,4,5], _, _)
     ].
 
+split([], [], []) :- !.
+split([X], [X], []) :- !.
+split([X,Y|Xs], [X|L1], [Y|L2]) :-
+    split(Xs, L1, L2).
+
 % merge(+SortedList1, +SortedList2, +Relation, ?SortedList)
 %
 % Merges two sorted lists into one, maintaining sort order.
+
+test(merge/4, Goals) :-
+    Goals = [ true
+    , merge([], [], <, [])
+    , merge([1,3,5], [2,4], <, [1,2,3,4,5])
+    ].
 
 merge([], Ys, _, Ys) :- !.
 merge(Xs, [], _, Xs) :- !.
@@ -55,9 +61,3 @@ merge([X|Xs], [Y|Ys], Rel, [X|L]) :-
 merge([X|Xs], [Y|Ys], Rel, [Y|L]) :-
     % \+ check(Rel, X, Y),
     merge([X|Xs], Ys, Rel, L).
-
-test(merge/4, Goals) :-
-    Goals = [ true
-    , merge([], [], <, [])
-    , merge([1,3,5], [2,4], <, [1,2,3,4,5])
-    ].
