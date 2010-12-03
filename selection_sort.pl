@@ -1,12 +1,17 @@
 :- [sort_utils].
 
-%% XXX
+%% selection_sort(+List, +Relation, ?SortedList)
 %
 % XXXXXX
 
 test(selection_sort/3, Goals) :-
     Goals = [ true
-    , fail
+    , selection_sort([], <, [])
+    , selection_sort([1,2,3,4,5], <, [1,2,3,4,5])
+    , selection_sort([5,4,3,2,1], <, [1,2,3,4,5])
+    , selection_sort([1,1,1,1,1], <, [1,1,1,1,1])
+    , selection_sort([1,2,3,1,2,3], >=, [3,3,2,2,1,1])
+    , selection_sort([3,2,1,3,2,1], >=, [3,3,2,2,1,1])
     ].
 
 selection_sort([], _, []) :- !.
@@ -27,6 +32,7 @@ test(extract_extremum/4, Goals) :-
     , extract_extremum([1,6,5,4,3,2], <, 1, [6,5,4,3,2])
     , extract_extremum([1,2,3,4,5,6], <, 1, [2,3,4,5,6])
     , extract_extremum([5,2,4,0,1,3], <, 0, [5,2,4,1,3])
+    , one:extract_extremum([5,5,5,5], =<, _, _)
     ].
 
 extract_extremum([Extremum], _, Extremum, []) :- !.
@@ -37,7 +43,7 @@ extract_extremum([X,Y|Xs], Rel, Extremum, [Other|Others]) :-
 % relate(+X, +Y, +Relation, ?Winner, ?Loser)
 %
 % Relates X and Y using Relation(X, Y) such that Winner is the first of X and
-% Y that satisfies the relation, and Loser is the other term. 
+% Y that satisfies the relation, and Loser is the other term.
 
 test(relate/5, Goals) :-
     Goals = [ true
