@@ -2,7 +2,8 @@
 
 %% selection_sort(+List, +Relation, ?SortedList)
 %
-% XXXXXX
+% True if SortedList is the elements in List such that Relation(A, B) is true
+% for any two consecutive elements A and B in SortedList.
 
 test(selection_sort/3, Goals) :-
     Goals = [ true
@@ -21,9 +22,9 @@ selection_sort(L, Rel, [Extremum|Sorted]) :-
     extract_extremum(L, Rel, Extremum, Rest),
     selection_sort(Rest, Rel, Sorted).
 
-% extract_extremum(+List, +Relation, ?Extremum, ?Others) XXX
+% extract_extremum(+List, +Relation, ?Extremum, ?Others)
 %
-% Separates the extremum from all other elements of Lis.
+% Separates the extremum from all other elements of List.
 
 test(extract_extremum/4, Goals) :-
     Goals = [ true
