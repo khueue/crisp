@@ -21,7 +21,9 @@ test :-
     crisp_version(Version),
     write('Crisp '), write_version(Version), nl,
     write('Started testing.'), nl,
-    nl, collect_and_run, nl,
+    nl,
+    collect_and_run,
+    nl,
     write('Finished testing.'), nl.
 
 write_version([X]) :-
