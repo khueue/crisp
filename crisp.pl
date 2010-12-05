@@ -63,7 +63,8 @@ write_test_name(Name) :-
 run_goals(Goals, TestStats) :-
     run_goals(Goals, stats(0,0), TestStats).
 
-update_global_stats(stats(Pass0,Fail0), stats(TestPass,TestFail), stats(Pass,Fail)) :-
+update_global_stats(
+        stats(Pass0,Fail0), stats(TestPass,TestFail), stats(Pass,Fail)) :-
     Pass is Pass0 + TestPass,
     Fail is Fail0 + TestFail.
 
