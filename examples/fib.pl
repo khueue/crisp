@@ -1,3 +1,7 @@
+:- module(fib, [fib/2]).
+
+:- ensure_loaded('../crisp_utils').
+
 %% fib(+Nth, +NthFib)
 %
 % True if NthFib is the Nth Fibonacci number, starting with (0, 0) and (1, 1).

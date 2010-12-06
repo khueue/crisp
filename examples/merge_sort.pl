@@ -1,4 +1,7 @@
-:- [sort_utils].
+:- module(merge_sort, [merge_sort/3]).
+
+:- ensure_loaded('../crisp_utils').
+:- use_module('sort_utils').
 
 %% merge_sort(+List, +Relation, ?SortedList)
 %

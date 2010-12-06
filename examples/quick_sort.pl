@@ -1,4 +1,7 @@
-:- [sort_utils].
+:- module(quick_sort, [quick_sort/3]).
+
+:- ensure_loaded('../crisp_utils').
+:- use_module('sort_utils').
 
 %% quick_sort(+List, +Relation, ?SortedList)
 %

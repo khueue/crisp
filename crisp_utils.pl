@@ -1,0 +1,1 @@
+:- multifile test/2.

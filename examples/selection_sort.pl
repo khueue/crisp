@@ -1,4 +1,7 @@
-:- [sort_utils].
+:- module(selection_sort, [selection_sort/3]).
+
+:- ensure_loaded('../crisp_utils').
+:- use_module('sort_utils').
 
 %% selection_sort(+List, +Relation, ?SortedList)
 %
