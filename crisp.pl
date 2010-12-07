@@ -1,13 +1,18 @@
 %   Crisp - Crazy simple unit testing in Prolog
 
-:- module(crisp, [crisp/0, crisp_version/1]).
+:- module(crisp, [crisp/0, version/1]).
 
-crisp_version([0,0,1]).
+%%  version(?VersionAsList)
+%
+%   True if VersionAsList is [Major,Minor,Patch].
+
+version([0,0,1]).
 
 %%  crisp
 %
 %   Runs all test/2 predicates defined in any module, except those that
-%   seem to be loaded by the environment, and then prints a test report.
+%   seem to belong to the environment, and simultaneously prints a
+%   test report.
 
 crisp :-
     write_prologue,
@@ -17,7 +22,6 @@ crisp :-
 collect_and_run :-
     findall(Module, current_module(Module), Modules),
     run_modules(Modules, stats(0,0), GlobalStats),
-    %module(user),
     write_summary(GlobalStats).
 
 write_summary(stats(Pass,Fail)) :-
@@ -161,7 +165,7 @@ update_stats(fail, stats(Pass,Fail0), stats(Pass,Fail)) :-
     Fail is Fail0 + 1.
 
 write_prologue :-
-    crisp_version(Version),
+    version(Version),
     write('Crisp '), write_version_list(Version), nl,
     nl.
 
