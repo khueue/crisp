@@ -5,7 +5,7 @@
 
 %%  selection_sort(+List, +Relation, ?SortedList)
 %
-%   True if SortedList is the elements in List such that Relation(A, B)
+%   True if SortedList is a permutation of List such that Relation(A, B)
 %   is true for any two consecutive elements A and B in SortedList.
 
 test(selection_sort/3, Goals) :-
@@ -48,8 +48,8 @@ extract_extremum([X,Y|Xs], Rel, Extremum, [Other|Others]) :-
 
 %   relate(+X, +Y, +Relation, ?Winner, ?Loser)
 %
-%   Relates X and Y using Relation(X, Y) such that Winner is the first of
-%   X and Y that satisfies the relation, and Loser is the other term.
+%   Relates X and Y using Relation(X, Y) such that Winner is the first
+%   of X and Y that satisfies the relation, and Loser is the other.
 
 test(relate/5, Goals) :-
     Goals = [ true
@@ -57,6 +57,7 @@ test(relate/5, Goals) :-
     , relate(1, 2, >, 2, 1)
     , relate(2, 2, >=, 2, 2)
     , relate(2, 2, >, 2, 2)
+    , one:relate(1, 1, >=, _, _)
     ].
 
 relate(Winner, Loser, Rel, Winner, Loser) :-

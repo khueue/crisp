@@ -5,7 +5,7 @@
 
 %%  quick_sort(+List, +Relation, ?SortedList)
 %
-%   True if SortedList is the elements in List such that Relation(A, B)
+%   True if SortedList is a permutation of List such that Relation(A, B)
 %   is true for any two consecutive elements A and B in SortedList.
 
 test(quick_sort/3, Goals) :-
