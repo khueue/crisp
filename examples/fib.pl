@@ -2,9 +2,10 @@
 
 :- ensure_loaded('../crisp_utils').
 
-%% fib(+Nth, +NthFib)
+%%  fib(+Nth, +NthFib)
 %
-% True if NthFib is the Nth Fibonacci number, starting with (0, 0) and (1, 1).
+%   True if NthFib is the Nth Fibonacci number, starting with base cases
+%   (0, 0) and (1, 1).
 
 test(fib/2, Goals) :-
     Goals = [ true
@@ -16,12 +17,15 @@ test(fib/2, Goals) :-
     , fib(4, 3)
     , fib(5, 5)
     , fib(6, 8)
+    , one:fib(6, _)
     ].
 
 fib(N, Fib) :-
     fib(N, 0, 1, Fib).
 
-% fib(+Nth, +ZerothFib, +FirstFib, ?NthFib)
+%   fib(+Nth, +ZerothFib, +FirstFib, ?NthFib)
+%
+%   Tail-recursive helper.
 
 test(fib/4, Goals) :-
     Goals = [ true
@@ -33,6 +37,7 @@ test(fib/4, Goals) :-
     , fib(4, 0, 1, 3)
     , fib(5, 0, 1, 5)
     , fib(6, 0, 1, 8)
+    , one:fib(6, 0, 1, _)
     ].
 
 fib(0, Fib, _, Fib) :- !.

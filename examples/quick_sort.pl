@@ -3,10 +3,10 @@
 :- ensure_loaded('../crisp_utils').
 :- use_module('sort_utils').
 
-%% quick_sort(+List, +Relation, ?SortedList)
+%%  quick_sort(+List, +Relation, ?SortedList)
 %
-% True if SortedList is the elements in List such that Relation(A, B) is true
-% for any two consecutive elements A and B in SortedList.
+%   True if SortedList is the elements in List such that Relation(A, B)
+%   is true for any two consecutive elements A and B in SortedList.
 
 test(quick_sort/3, Goals) :-
     Goals = [ true
@@ -24,9 +24,9 @@ test(quick_sort/3, Goals) :-
 quick_sort(L, Rel, S) :-
     quick_sort(L, Rel, [], S).
 
-% quick_sort(+List, +Relation, ?SortedList0, ?SortedList)
+%   quick_sort(+List, +Relation, ?SortedList0, ?SortedList)
 %
-% Uses SortedList0 as an accumulator.
+%   Uses SortedList0 as an accumulator.
 
 test(quick_sort/4, Goals) :-
     Goals = [ true
@@ -43,10 +43,10 @@ quick_sort([P|Xs], Rel, Sorted0, Sorted) :-
     quick_sort(Left, Rel, [P|Right1], Sorted),
     quick_sort(Right, Rel, Sorted0, Right1).
 
-% partition(+List, +Relation, +Pivot, ?Left, ?Right)
+%   partition(+List, +Relation, +Pivot, ?Left, ?Right)
 %
-% Partitions List into Left and Right such that Relation(X, Pivot) is true for
-% all elements X in Left.
+%   Partitions List into Left and Right such that Relation(X, Pivot)
+%   is true for all elements X in Left.
 
 test(partition/5, Goals) :-
     Goals = [ true

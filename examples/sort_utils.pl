@@ -1,10 +1,10 @@
-% Utilities used by sorting routines.
+%   Utilities used by sorting routines.
 
 :- module(sort_utils, [check/3]).
 
-%% check(+RelationPredicate, ?X, ?Y)
+%%  check(+RelationPredicate, ?X, ?Y)
 %
-% True if RelationPredicate(X, Y) is true.
+%   True if RelationPredicate(X, Y) is true.
 
 test(check/3, Goals) :-
     Goals = [ true

@@ -1,33 +1,13 @@
-% Crisp - Crazy simple unit testing for SWI-Prolog
+%   Crisp - Crazy simple unit testing in Prolog
 
 :- module(crisp, [crisp/0, crisp_version/1]).
 
 crisp_version([0,0,1]).
 
-% Let test/2 be defined by several files instead of each file overwriting old
-% definitions. With SICStus, I believe this must be added to all files that
-% have test/2 clauses.
-
-%:- multifile user:test/2.
-
-% Ignore warnings about test/2 (and any other predicates!) not being defined
-% together. We need this so we can scatter tests all over the place
-% (preferably next to the predicate under test).
-%:- dynamic test/2.
-
-%:- discontiguous user:test/2.
-
-%:- module_transparent(run_all_tests_aux/3).
-
-
-
-% crisp:run_all_tests_aux([test(split,[split([1,2],[1],[2])])], stats(0,0), S).
-
-
-
-%% crisp
+%%  crisp
 %
-% Runs all test/2 predicates defined in user space and prints a test report.
+%   Runs all test/2 predicates defined in any module, except those that
+%   seem to be loaded by the environment, and then prints a test report.
 
 crisp :-
     write_prologue,
@@ -60,9 +40,10 @@ run_modules([Module|Modules], GlobalStats0, GlobalStats) :-
 run_modules([_|Modules], GlobalStats0, GlobalStats) :-
     run_modules(Modules, GlobalStats0, GlobalStats).
 
-% This program.
+%   This program.
 ignored_module(crisp).
-% SWI-Prolog 5.10.2.
+
+%   SWI-Prolog 5.10.2.
 ignored_module(error).
 ignored_module(license).
 ignored_module(link_xpce).
@@ -74,7 +55,8 @@ ignored_module(swi_option).
 ignored_module(swi_system_utilities).
 ignored_module(system).
 ignored_module(toplevel_variables).
-% SICStus 3.12.5.
+
+%   SICStus 3.12.5.
 ignored_module(clpfd).
 ignored_module(prolog).
 ignored_module('SU_messages').
@@ -151,7 +133,7 @@ run_goals([fail:Goal|Goals], Module, Stats0, Stats) :-
     update_stats(Result, Stats0, Stats1),
     run_goals(Goals, Module, Stats1, Stats).
 run_goals([Goal|Goals], Module, Stats0, Stats) :-
-    % Not specially formed Goal.
+    % Goal has no special form.
     execute_test(Goal, Module, Result),
     write_result(Goal, Result),
     update_stats(Result, Stats0, Stats1),

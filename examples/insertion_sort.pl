@@ -3,10 +3,10 @@
 :- ensure_loaded('../crisp_utils').
 :- use_module('sort_utils').
 
-%% insertion_sort(+List, +Relation, ?SortedList)
+%%  insertion_sort(+List, +Relation, ?SortedList)
 %
-% True if SortedList is the elements in List such that Relation(A, B) is true
-% for any two consecutive elements A and B in SortedList.
+%   True if SortedList is a permutation of List such that Relation(A, B)
+%   is true for any two consecutive elements A and B in SortedList.
 
 test(insertion_sort/3, Goals) :-
     Goals = [ true
@@ -21,9 +21,9 @@ test(insertion_sort/3, Goals) :-
 insertion_sort(L, Rel, S) :-
     insertion_sort(L, Rel, [], S).
 
-% insertion_sort(+List, +Relation, +SortedList0, ?SortedList)
+%   insertion_sort(+List, +Relation, +SortedList0, ?SortedList)
 %
-% Uses SortedList0 to accumulate the sorted elements so far.
+%   Uses SortedList0 to accumulate the sorted elements so far.
 
 test(insertion_sort/4, Goals) :-
     Goals = [ true
@@ -38,7 +38,7 @@ insertion_sort([X|Xs], Rel, Sorted0, Sorted) :-
     ordered_insert(Sorted0, X, Rel, Sorted1),
     insertion_sort(Xs, Rel, Sorted1, Sorted).
 
-% ordered_insert(+OrderedList, +X, +Relation, ?OrderedListWithX)
+%   ordered_insert(+OrderedList, +X, +Relation, ?OrderedListWithX)
 
 test(ordered_insert/4, Goals) :-
     Goals = [ true

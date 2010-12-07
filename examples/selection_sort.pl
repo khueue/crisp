@@ -3,10 +3,10 @@
 :- ensure_loaded('../crisp_utils').
 :- use_module('sort_utils').
 
-%% selection_sort(+List, +Relation, ?SortedList)
+%%  selection_sort(+List, +Relation, ?SortedList)
 %
-% True if SortedList is the elements in List such that Relation(A, B) is true
-% for any two consecutive elements A and B in SortedList.
+%   True if SortedList is the elements in List such that Relation(A, B)
+%   is true for any two consecutive elements A and B in SortedList.
 
 test(selection_sort/3, Goals) :-
     Goals = [ true
@@ -25,9 +25,9 @@ selection_sort(L, Rel, [Extremum|Sorted]) :-
     extract_extremum(L, Rel, Extremum, Rest),
     selection_sort(Rest, Rel, Sorted).
 
-% extract_extremum(+List, +Relation, ?Extremum, ?Others)
+%   extract_extremum(+List, +Relation, ?Extremum, ?Others)
 %
-% Separates the extremum from all other elements of List.
+%   Separates the extremum from all other elements of List.
 
 test(extract_extremum/4, Goals) :-
     Goals = [ true
@@ -46,10 +46,10 @@ extract_extremum([X,Y|Xs], Rel, Extremum, [Other|Others]) :-
     relate(X, Y, Rel, Extremum0, Other),
     extract_extremum([Extremum0|Xs], Rel, Extremum, Others).
 
-% relate(+X, +Y, +Relation, ?Winner, ?Loser)
+%   relate(+X, +Y, +Relation, ?Winner, ?Loser)
 %
-% Relates X and Y using Relation(X, Y) such that Winner is the first of X and
-% Y that satisfies the relation, and Loser is the other term.
+%   Relates X and Y using Relation(X, Y) such that Winner is the first of
+%   X and Y that satisfies the relation, and Loser is the other term.
 
 test(relate/5, Goals) :-
     Goals = [ true
