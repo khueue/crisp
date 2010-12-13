@@ -71,7 +71,7 @@ run_module(Module, Stats0, Stats) :-
 run_all_tests([], _Module, GlobalStats, GlobalStats).
 run_all_tests([test(Name,Goals)|Tests], Module, GlobalStats0, GlobalStats) :-
     run_test(test(Name,Goals), Module, TestStats),
-    update_stats(GlobalStats0, TestStats, GlobalStats1),
+    add_stats(GlobalStats0, TestStats, GlobalStats1),
     run_all_tests(Tests, Module, GlobalStats1, GlobalStats).
 
 run_test(test(Name,Goals), Module, TestStats) :-
@@ -79,7 +79,7 @@ run_test(test(Name,Goals), Module, TestStats) :-
     run_goals(Goals, Module, TestStats),
     write_stats(TestStats).
 
-update_stats(stats(P0,F0), stats(P1,F1), stats(Pass,Fail)) :-
+add_stats(stats(P0,F0), stats(P1,F1), stats(Pass,Fail)) :-
     Pass is P0 + P1,
     Fail is F0 + F1.
 
