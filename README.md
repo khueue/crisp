@@ -7,25 +7,43 @@ Crisp should be compatible with:
 Crisp is NOT compatible with:
 	- GNU Prolog (due to its lack of a proper module system)
 
-Make sure the directives in crisp_utils are loaded by each file that
-needs testing, and then sprinkle your code with test/2 predicates:
+Make sure the directives in crisp_utils are loaded by each file (module or not) that needs testing, and then sprinkle your code with test/2 predicates:
 
-	:- module(conc, [conc/3]).
+	:- module(concatenate, [concatenate/3]).
 	:- ensure_loaded('path/to/crisp_utils').
 
-	test(conc/3, Goals) :-
+	test(concatenate/3, Goals) :-
 		Goals = [ true
-		, conc([1,2], [3,4], [1,2,3,4])
-		, one:conc([1,2], [3,4], _)
-		, fail:conc([1,2], [3,4], [3,4,1,2])
+		, concatenate([1,2], [3,4], [1,2,3,4])
+		, concatenate([1,2], [3,4], [1])
+		, one:concatenate([1,2], [3,4], _)
+		, fail:concatenate([1,2], [3,4], [3,4,1,2])
 		].
 
-	conc([], L2, L2).
-	conc([X|L1], L2, [X|L3]) :-
-	    conc(L1, L2, L3).
+	concatenate([], L2, L2).
+	concatenate([X|L1], L2, [X|L3]) :-
+	    concatenate(L1, L2, L3).
 
-The test case 'true' is simply ignored. It's just a trick to make the
-remaining test cases line up nicely with the commas. Do what you want
-with it.
+Then, simply issue a call to crisp/0:
+
+	?- crisp.
+	Crisp 0.0.1
+
+	### Module: concatenate
+	- concatenate/3
+	    >>> FAIL: concatenate([1,2],[3,4],[1])
+	        => 1/4 fail, 3/4 pass
+
+	Summary: 1/4 fail, 3/4 pass
+
+	true.
+
+Special forms of goals:
+
+*	true - Simply ignored. It's just a trick to make the remaining test cases line up nicely with the commas.
+
+*	one:Goal - Fails if Goal has more than one answer (basically just does a findall and checks the number of answers).
+
+*	fail:Goal - Succeeds if Goal fails. Basically just 'not' (\+).
 
 See the examples folder for more examples.
