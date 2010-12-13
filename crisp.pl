@@ -1,4 +1,15 @@
-%   Crisp - Crazy simple unit testing in Prolog
+% Crisp - Crazy simple unit testing in Prolog
+%
+% Make sure the directives in crisp_utils are loaded by each file that
+% needs testing, and then sprinkle your code with test/2 predicates.
+% See the examples folder for example usage.
+%
+% Crisp should be compatible with:
+% - SWI-Prolog 5.10.2
+% - SICStus 3.12.5
+%
+% Crisp is NOT compatible with:
+% - GNU Prolog (due to its lack of a proper module system)
 
 :- module(crisp, [crisp/0, version/1]).
 
@@ -10,9 +21,9 @@ version([0,0,1]).
 
 %%  crisp
 %
-%   Runs all test/2 predicates defined in any module, except those that
-%   seem to belong to the environment, and simultaneously prints a
-%   test report.
+%   Processes all modules (except those that seem to belong to the
+%   environment, see ignored_module/1) in alphabetical order, and runs
+%   all test/2 predicates it finds. Prints test results on the fly.
 
 crisp :-
     write_prologue,
@@ -20,7 +31,7 @@ crisp :-
     write_epilogue.
 
 collect_and_run :-
-    findall(Module, current_module(Module), Modules),
+    setof(Module, current_module(Module), Modules),
     run_modules(Modules, stats(0,0), GlobalStats),
     write_summary(GlobalStats).
 
@@ -44,10 +55,9 @@ run_modules([Module|Modules], GlobalStats0, GlobalStats) :-
 run_modules([_|Modules], GlobalStats0, GlobalStats) :-
     run_modules(Modules, GlobalStats0, GlobalStats).
 
-%   This program.
+% This module.
 ignored_module(crisp).
-
-%   SWI-Prolog 5.10.2.
+% SWI-Prolog 5.10.2.
 ignored_module(error).
 ignored_module(license).
 ignored_module(link_xpce).
@@ -59,8 +69,7 @@ ignored_module(swi_option).
 ignored_module(swi_system_utilities).
 ignored_module(system).
 ignored_module(toplevel_variables).
-
-%   SICStus 3.12.5.
+% SICStus 3.12.5.
 ignored_module(clpfd).
 ignored_module(prolog).
 ignored_module('SU_messages').
