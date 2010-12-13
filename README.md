@@ -1,4 +1,4 @@
-Crisp - Crazy simple unit testing in Prolog
+= Crisp - Crazy simple unit testing in Prolog
 
 Crisp should be compatible with:
 
