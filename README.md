@@ -1,11 +1,11 @@
 Crisp - Crazy simple unit testing in Prolog
 
 Crisp should be compatible with:
-* SWI-Prolog 5.10.2
-* SICStus 3.12.5
+	- SWI-Prolog 5.10.2
+	- SICStus 3.12.5
 
 Crisp is NOT compatible with:
-* GNU Prolog (due to its lack of a proper module system)
+	- GNU Prolog (due to its lack of a proper module system)
 
 Make sure the directives in crisp_utils are loaded by each file that
 needs testing, and then sprinkle your code with test/2 predicates:
