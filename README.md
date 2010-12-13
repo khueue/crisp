@@ -23,8 +23,8 @@ Make sure the directives in crisp_utils are loaded by each file (module or not) 
 		Goals = [ true
 		, concatenate([1,2], [3,4], [1,2,3,4])
 		, concatenate([1,2], [3,4], [1])
-		, one:concatenate([1,2], [3,4], _)
-		, fail:concatenate([1,2], [3,4], [3,4,1,2])
+		, one/concatenate([1,2], [3,4], _)
+		, fail/concatenate([1,2], [3,4], [3,4,1,2])
 		].
 
 	concatenate([], L2, L2).
@@ -38,7 +38,7 @@ Then, simply issue a call to crisp/0:
 
 	### Module: concatenate
 	- concatenate/3
-	    >>> FAIL: concatenate([1,2],[3,4],[1])
+	    >>> fail/ concatenate([1,2],[3,4],[1])
 	        => 1/4 fail, 3/4 pass
 
 	Summary: 1/4 fail, 3/4 pass
@@ -49,8 +49,8 @@ Special forms of goals:
 
  * true - Simply ignored. It's just a trick to make the remaining test cases line up nicely with the commas.
 
- * one:Goal - Fails if Goal has more than one answer (basically just does a findall and checks the number of answers).
+ * one/Goal - Fails if Goal has more than one answer (basically just does a findall and checks the number of answers).
 
- * fail:Goal - Succeeds if Goal fails. Basically the same as \\+Goal.
+ * fail/Goal - Succeeds if Goal fails. Basically the same as \\+Goal.
 
 See the examples folder for more examples.

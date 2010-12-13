@@ -5,8 +5,8 @@ test(concatenate/3, Goals) :-
 	Goals = [ true
 	, concatenate([1,2], [3,4], [1,2,3,4])
 	, concatenate([1,2], [3,4], [1])
-	, one:concatenate([1,2], [3,4], _)
-	, fail:concatenate([1,2], [3,4], [3,4,1,2])
+	, one/concatenate([1,2], [3,4], _)
+	, fail/concatenate([1,2], [3,4], [3,4,1,2])
 	].
 
 concatenate([], L2, L2).

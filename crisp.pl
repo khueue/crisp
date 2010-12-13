@@ -68,14 +68,17 @@ ignored_module('SU_messages').
 
 run_module(Module, Stats0, Stats) :-
     write_module_header(Module),
-    findall(test(Name,Goals), Module:test(Name,Goals), Tests),
+    all_tests_in_module(Module, Tests),
     run_all_tests(Tests, Module, Stats0, Stats).
 
-run_all_tests([], _Module, GlobalStats, GlobalStats).
-run_all_tests([test(Name,Goals)|Tests], Module, GlobalStats0, GlobalStats) :-
+all_tests_in_module(Module, Tests) :-
+    findall(test(Name,Goals), Module:test(Name,Goals), Tests).
+
+run_all_tests([], _Module, Stats, Stats).
+run_all_tests([test(Name,Goals)|Tests], Module, Stats0, Stats) :-
     run_test(test(Name,Goals), Module, TestStats),
-    add_stats(GlobalStats0, TestStats, GlobalStats1),
-    run_all_tests(Tests, Module, GlobalStats1, GlobalStats).
+    add_stats(Stats0, TestStats, Stats1),
+    run_all_tests(Tests, Module, Stats1, Stats).
 
 run_test(test(Name,Goals), Module, TestStats) :-
     write_test_name(Name),
@@ -93,16 +96,16 @@ run_goals([], _Module, Stats, Stats).
 run_goals([true|Goals], Module, Stats0, Stats) :-
     !,
     run_goals(Goals, Module, Stats0, Stats).
-run_goals([one:Goal|Goals], Module, Stats0, Stats) :-
+run_goals([one/Goal|Goals], Module, Stats0, Stats) :-
     !,
     execute_deterministic_test(Goal, Module, Result),
-    write_result(Result, one:Goal),
+    write_result(Result, one/Goal),
     update_stats(Result, Stats0, Stats1),
     run_goals(Goals, Module, Stats1, Stats).
-run_goals([fail:Goal|Goals], Module, Stats0, Stats) :-
+run_goals([fail/Goal|Goals], Module, Stats0, Stats) :-
     !,
     execute_test(\+(Goal), Module, Result),
-    write_result(Result, fail:Goal),
+    write_result(Result, fail/Goal),
     update_stats(Result, Stats0, Stats1),
     run_goals(Goals, Module, Stats1, Stats).
 run_goals([Goal|Goals], Module, Stats0, Stats) :-
@@ -168,7 +171,7 @@ write_ratio(Some/All) :-
 write_result(pass, _Goal).
 write_result(fail, Goal) :-
     nl,
-    write('    >>> FAIL: '), write(Goal).
+    write('    >>> fail/ '), write(Goal).
 
 write_summary(stats(Pass,Fail)) :-
     nl,
