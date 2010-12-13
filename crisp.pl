@@ -1,7 +1,7 @@
-% Crisp
+% Crisp - Crazy Simple Unit Testing in Prolog
 %
 % MIT License (http://www.opensource.org/licenses/mit-license.php)
-% Copyright (c) 2009, khueue.
+% Copyright (c) 2010, Sebastian Lundstrom.
 
 :- module(crisp, [crisp/0, version/1]).
 
