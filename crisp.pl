@@ -23,9 +23,12 @@ crisp :-
     write_epilogue.
 
 collect_and_run :-
-    setof(Module, current_module(Module), Modules),
+    all_modules(Modules),
     run_all_modules(Modules, GlobalStats),
     write_summary(GlobalStats).
+
+all_modules(Modules) :-
+    setof(Module, current_module(Module), Modules).
 
 run_all_modules(Modules, GlobalStats) :-
     run_all_modules(Modules, stats(0,0), GlobalStats).
@@ -42,7 +45,7 @@ run_all_modules([_Module|Modules], Stats0, Stats) :-
 
 suitable_module(Module) :-
     \+ ignored_module(Module),
-    current_predicate(Module:test/2).
+    current_predicate(Module:test/2). % Some test/2 exists.
 
 % This module.
 ignored_module(crisp).
@@ -64,7 +67,7 @@ ignored_module(prolog).
 ignored_module('SU_messages').
 
 run_module(Module, Stats0, Stats) :-
-    write('### Module: '), write(Module), nl,
+    write_module_header(Module),
     findall(test(Name,Goals), Module:test(Name,Goals), Tests),
     run_all_tests(Tests, Module, Stats0, Stats).
 
@@ -83,8 +86,8 @@ add_stats(stats(P0,F0), stats(P1,F1), stats(Pass,Fail)) :-
     Pass is P0 + P1,
     Fail is F0 + F1.
 
-run_goals(Goals, Module, TestStats) :-
-    run_goals(Goals, Module, stats(0,0), TestStats).
+run_goals(Goals, Module, Stats) :-
+    run_goals(Goals, Module, stats(0,0), Stats).
 
 run_goals([], _Module, Stats, Stats).
 run_goals([true|Goals], Module, Stats0, Stats) :-
@@ -121,10 +124,13 @@ execute_test(Goal, Module, pass) :-
 execute_test(_Goal, _Module, fail).
     % \+ Module:call(Goal).
 
-update_stats(pass, stats(Pass0,Fail), stats(Pass,Fail)) :-
+update_stats(pass, stats(Pass0,F), stats(Pass,F)) :-
     Pass is Pass0 + 1.
-update_stats(fail, stats(Pass,Fail0), stats(Pass,Fail)) :-
+update_stats(fail, stats(P,Fail0), stats(P,Fail)) :-
     Fail is Fail0 + 1.
+
+write_module_header(Module) :-
+    write('### Module: '), write(Module), nl.
 
 write_test_name(Pred/Arity) :-
     !,
@@ -136,6 +142,7 @@ write_stats(stats(Pass,0)) :-
     !,
     write(' => '), write_pass(stats(Pass,0)), nl.
 write_stats(Stats) :-
+    % At least one test failed.
     nl,
     write('        => '), write_fail(Stats),
     write(', '), write_pass(Stats), nl.
