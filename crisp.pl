@@ -24,7 +24,7 @@ crisp :-
 
 collect_and_run :-
     setof(Module, current_module(Module), Modules),
-    run_modules(Modules, stats(0,0), GlobalStats),
+    run_all_modules(Modules, stats(0,0), GlobalStats),
     write_summary(GlobalStats).
 
 write_summary(stats(Pass,Fail)) :-
@@ -35,17 +35,24 @@ write_summary(stats(Pass,Fail)) :-
     write_ratio(Pass/Total), write(' pass'),
     nl.
 
-run_modules([], GlobalStats, GlobalStats).
-run_modules([Module|Modules], GlobalStats0, GlobalStats) :-
-    \+ ignored_module(Module),
-    current_predicate(Module:test/2),
+run_all_modules([], GlobalStats, GlobalStats).
+run_all_modules([Module|Modules], GlobalStats0, GlobalStats) :-
+    suitable_module(Module),
     !,
+    run_module(Module, GlobalStats0, GlobalStats1),
+    run_all_modules(Modules, GlobalStats1, GlobalStats).
+run_all_modules([_Module|Modules], GlobalStats0, GlobalStats) :-
+    % \+ suitable_module(Module),
+    run_all_modules(Modules, GlobalStats0, GlobalStats).
+
+suitable_module(Module) :-
+    \+ ignored_module(Module),
+    current_predicate(Module:test/2).
+
+run_module(Module, Stats0, Stats) :-
     write('### Module: '), write(Module), nl,
     findall(test(Name,Goals), Module:test(Name,Goals), Tests),
-    run_all_tests(Tests, Module, GlobalStats0, GlobalStats1),
-    run_modules(Modules, GlobalStats1, GlobalStats).
-run_modules([_|Modules], GlobalStats0, GlobalStats) :-
-    run_modules(Modules, GlobalStats0, GlobalStats).
+    run_all_tests(Tests, Module, Stats0, Stats).
 
 % This module.
 ignored_module(crisp).
@@ -66,20 +73,16 @@ ignored_module(clpfd).
 ignored_module(prolog).
 ignored_module('SU_messages').
 
-run_all_tests([], Module, GlobalStats, GlobalStats) :-
-    !,
-    write('No test(Name, Goals) predicates found.'), nl,
-    run_all_tests_aux([], Module, GlobalStats, GlobalStats).
-run_all_tests(Tests, Module, GlobalStats0, GlobalStats) :-
-    run_all_tests_aux(Tests, Module, GlobalStats0, GlobalStats).
+run_all_tests([], _Module, GlobalStats, GlobalStats).
+run_all_tests([test(Name,Goals)|Tests], Module, GlobalStats0, GlobalStats) :-
+    run_test(test(Name,Goals), Module, TestStats),
+    update_global_stats(GlobalStats0, TestStats, GlobalStats1),
+    run_all_tests(Tests, Module, GlobalStats1, GlobalStats).
 
-run_all_tests_aux([], _Module, GlobalStats, GlobalStats).
-run_all_tests_aux([test(Name,Goals)|Tests], Module, GlobalStats0, GlobalStats) :-
+run_test(test(Name,Goals), Module, TestStats) :-
     write_test_name(Name),
     run_goals(Goals, Module, TestStats),
-    write_stats(TestStats),
-    update_global_stats(GlobalStats0, TestStats, GlobalStats1),
-    run_all_tests_aux(Tests, Module, GlobalStats1, GlobalStats).
+    write_stats(TestStats).
 
 write_test_name(Pred/Arity) :-
     !,
@@ -90,10 +93,9 @@ write_test_name(Name) :-
 run_goals(Goals, Module, TestStats) :-
     run_goals(Goals, Module, stats(0,0), TestStats).
 
-update_global_stats(
-        stats(Pass0,Fail0), stats(TestPass,TestFail), stats(Pass,Fail)) :-
-    Pass is Pass0 + TestPass,
-    Fail is Fail0 + TestFail.
+update_global_stats(stats(P0,F0), stats(P1,F1), stats(Pass,Fail)) :-
+    Pass is P0 + P1,
+    Fail is F0 + F1.
 
 write_stats(stats(Pass,0)) :-
     !,
@@ -127,7 +129,7 @@ run_goals([true|Goals], Module, Stats0, Stats) :-
     run_goals(Goals, Module, Stats0, Stats).
 run_goals([one:Goal|Goals], Module, Stats0, Stats) :-
     !,
-    execute_det_test(Goal, Module, Result),
+    execute_deterministic_test(Goal, Module, Result),
     write_result(one:Goal, Result),
     update_stats(Result, Stats0, Stats1),
     run_goals(Goals, Module, Stats1, Stats).
@@ -144,10 +146,11 @@ run_goals([Goal|Goals], Module, Stats0, Stats) :-
     update_stats(Result, Stats0, Stats1),
     run_goals(Goals, Module, Stats1, Stats).
 
-execute_det_test(Goal, Module, pass) :-
-    findall(_, Module:Goal, [_OnlyOne]),
+execute_deterministic_test(Goal, Module, pass) :-
+    findall(_, Module:Goal, [_ExactlyOneSolution]),
     !.
-execute_det_test(_Goal, _Module, fail).
+execute_deterministic_test(_Goal, _Module, fail).
+    % Not exactly one solution.
 
 execute_test(Goal, Module, pass) :-
     Module:call(Goal),
