@@ -4,13 +4,13 @@
 
 Crisp should be compatible with:
 
- *	SWI-Prolog 5.10.2
+ * SWI-Prolog 5.10.2
 
- *	SICStus 3.12.5
+ * SICStus 3.12.5
 
 Crisp is NOT compatible with:
 
- *	GNU Prolog (due to its lack of a proper module system)
+ * GNU Prolog (due to its lack of a proper module system)
 
 ## Usage
 
