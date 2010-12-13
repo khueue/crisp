@@ -1,4 +1,6 @@
-= Crisp - Crazy simple unit testing in Prolog
+# Crisp - Crazy simple unit testing in Prolog
+
+## Compatibility
 
 Crisp should be compatible with:
 
@@ -9,6 +11,8 @@ Crisp should be compatible with:
 Crisp is NOT compatible with:
 
  *	GNU Prolog (due to its lack of a proper module system)
+
+## Usage
 
 Make sure the directives in crisp_utils are loaded by each file (module or not) that needs testing, and then sprinkle your code with test/2 predicates:
 
