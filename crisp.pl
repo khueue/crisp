@@ -1,15 +1,7 @@
-% Crisp - Crazy simple unit testing in Prolog
+% Crisp
 %
-% Make sure the directives in crisp_utils are loaded by each file that
-% needs testing, and then sprinkle your code with test/2 predicates.
-% See the examples folder for example usage.
-%
-% Crisp should be compatible with:
-% - SWI-Prolog 5.10.2
-% - SICStus 3.12.5
-%
-% Crisp is NOT compatible with:
-% - GNU Prolog (due to its lack of a proper module system)
+% MIT License (http://www.opensource.org/licenses/mit-license.php)
+% Copyright (c) 2009, khueue.
 
 :- module(crisp, [crisp/0, version/1]).
 
