@@ -47,10 +47,10 @@ Then, simply issue a call to crisp/0:
 
 Special forms of goals:
 
-*	true - Simply ignored. It's just a trick to make the remaining test cases line up nicely with the commas.
+ * true - Simply ignored. It's just a trick to make the remaining test cases line up nicely with the commas.
 
-*	one:Goal - Fails if Goal has more than one answer (basically just does a findall and checks the number of answers).
+ * one:Goal - Fails if Goal has more than one answer (basically just does a findall and checks the number of answers).
 
-*	fail:Goal - Succeeds if Goal fails. Basically the same as \\+Goal.
+ * fail:Goal - Succeeds if Goal fails. Basically the same as \\+Goal.
 
 See the examples folder for more examples.
