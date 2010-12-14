@@ -1,27 +1,27 @@
-:- module(shotgun_sort, [shotgun_sort/3]).
+:- module(permutation_sort, [permutation_sort/3]).
 
 :- ensure_loaded('../crisp_utils').
 :- use_module('sort_utils').
 
-%%  shotgun_sort(+List, +Relation, ?SortedList)
+%%  permutation_sort(+List, +Relation, ?SortedList)
 %
 %   True if SortedList is a permutation of List such that Relation(A, B)
 %   is true for any two consecutive elements A and B in SortedList.
 
-test(shotgun_sort/3, Goals) :-
+test(permutation_sort/3, Goals) :-
     Goals = [ true
-    , shotgun_sort([], _, [])
-    , shotgun_sort([1], _, [1])
-    , shotgun_sort([1,2,3,4,5], <, [1,2,3,4,5])
-    , shotgun_sort([5,4,3,2,1], <, [1,2,3,4,5])
-    , fail:shotgun_sort([1,1,1,1,1], <, [1,1,1,1,1]) % Fails is_sorted!
-    , shotgun_sort([1,2,3,1,2,3], >=, [3,3,2,2,1,1])
-    , shotgun_sort([3,2,1,3,2,1], >=, [3,3,2,2,1,1])
-    , (shotgun_sort([3,2,1,3,2,1], >=, S1), S1 = [3,3,2,2,1,1])
-    , one:shotgun_sort([3,2,1,3,2,1], >=, _)
+    , permutation_sort([], _, [])
+    , permutation_sort([1], _, [1])
+    , permutation_sort([1,2,3,4,5], <, [1,2,3,4,5])
+    , permutation_sort([5,4,3,2,1], <, [1,2,3,4,5])
+    , fail:permutation_sort([1,1,1,1,1], <, [1,1,1,1,1]) % Fails is_sorted!
+    , permutation_sort([1,2,3,1,2,3], >=, [3,3,2,2,1,1])
+    , permutation_sort([3,2,1,3,2,1], >=, [3,3,2,2,1,1])
+    , (permutation_sort([3,2,1,3,2,1], >=, S1), S1 = [3,3,2,2,1,1])
+    , one:permutation_sort([3,2,1,3,2,1], >=, _)
     ].
 
-shotgun_sort(List, Rel, Sorted) :-
+permutation_sort(List, Rel, Sorted) :-
     permutation(List, Sorted),
     is_sorted(Sorted, Rel),
     !.
