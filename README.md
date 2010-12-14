@@ -62,4 +62,14 @@ Special forms of test goals:
 
  * fail:Goal - Succeeds if Goal fails. Basically the same as \\+Goal.
 
-See the examples folder for more examples.
+For a full test run of all the examples included with Crisp:
+
+ # Clone this repository.
+
+ # Step into the project root.
+
+ # Start SWI-Prolog.
+
+ # ?- [crisp, 'examples/*'].
+
+ # ?- crisp.
