@@ -2,6 +2,8 @@
 %
 % MIT License (http://www.opensource.org/licenses/mit-license.php)
 % Copyright (c) 2010, Sebastian Lundstrom.
+%
+% Todo: Numbers for failing tests? In lack of line numbers.
 
 :- module(crisp, [crisp/0, crisp_version/1]).
 
@@ -61,10 +63,27 @@ ignored_module(swi_option).
 ignored_module(swi_system_utilities).
 ignored_module(system).
 ignored_module(toplevel_variables).
-% SICStus 3.12.5.
+% SICStus Prolog 3.12.5.
 ignored_module(clpfd).
 ignored_module(prolog).
 ignored_module('SU_messages').
+% YAP Prolog 6.2.0.
+ignored_module(dialect).
+ignored_module(autoloader).
+ignored_module(lists).
+ignored_module(swi).
+ignored_module(operating_system_support).
+ignored_module(nb).
+ignored_module(arg).
+ignored_module(yap_hacks).
+ignored_module(readutil).
+ignored_module(system).
+ignored_module(terms).
+ignored_module(charsio).
+ignored_module(attributes).
+ignored_module(idb).
+ignored_module(user).
+ignored_module(prolog).
 
 /*
 
@@ -219,5 +238,4 @@ write_version_list([X|Xs]) :-
     write(X), write('.'),
     write_version_list(Xs).
 
-write_epilogue :-
-    nl.
+write_epilogue.

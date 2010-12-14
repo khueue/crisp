@@ -4,10 +4,11 @@ Crisp is a tiny unit testing tool designed for ease of use and simplicity. It is
 
 ## Compatibility
 
-Crisp should be compatible with at least:
+Crisp 0.0.1 should be compatible with at least:
 
  * SWI-Prolog 5.10.2
- * SICStus 3.12.5
+ * SICStus Prolog 3.12.5
+ * YAP Prolog 6.2.0
 
 Crisp is NOT compatible with:
 
