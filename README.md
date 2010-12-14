@@ -1,5 +1,6 @@
 # Crisp - Crazy Simple Unit Testing in Prolog
 
+Crisp is a tiny unit testing tool designed for ease of use and simplicity. It is basically just a wrapper around a very basic idea: keeping small and simple tests close to the code at hand.
 
 ## Compatibility
 
@@ -16,7 +17,12 @@ Crisp is NOT compatible with:
 
 ## Usage
 
-Make sure the directives in crisp_utils are loaded by each file that needs testing, and then sprinkle your code with test/2 predicates. Files under test need not be modules, and predicates under test need not be exported. Example with a module:
+First, make sure the directives in crisp_utils.pl are loaded by each file that needs testing. These directives let us define test/2 predicates in many places in many files:
+
+	:- multifile test/2.
+	:- discontiguous test/2.
+
+Then sprinkle your code with test/2 predicates, where the first argument is a label for the test (name and arity of the tested predicate might be a good idea), and the second argument is a list of goals that are supposed to succeed. Files under test need not be modules, and predicates under test need not be exported -- Crisp traverses all loaded modules, including the top level. Example using a module:
 
 	:- module(concatenate, [concatenate/3]).
 	:- ensure_loaded('../crisp_utils').
