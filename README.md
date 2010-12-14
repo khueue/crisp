@@ -4,7 +4,7 @@ Crisp is a tiny unit testing tool designed for ease of use and simplicity. It is
 
 ## Compatibility
 
-Crisp should be compatible with:
+Crisp should be compatible with at least:
 
  * SWI-Prolog 5.10.2
 
@@ -39,7 +39,7 @@ Then sprinkle your code with test/2 predicates, where the first argument is a la
 	concatenate([X|L1], L2, [X|L3]) :-
 	    concatenate(L1, L2, L3).
 
-Then, simply call crisp/0 to run all tests:
+Simply call crisp/0 to run all tests:
 
 	?- crisp.
 	Crisp 0.0.1
@@ -57,7 +57,7 @@ Special forms of test goals:
 
  * true - Simply ignored. It's just a trick to make the remaining test cases line up nicely with the commas.
 
- * one:Goal - Fails if Goal has more than one answer. Basically just does a findall and checks the number of answers.
+ * one:Goal - Fails if Goal does not have exactly one solution. Basically just does a findall and checks the number of answers.
 
  * fail:Goal - Succeeds if Goal fails. Basically the same as \\+Goal.
 
