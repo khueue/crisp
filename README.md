@@ -19,7 +19,7 @@ Crisp is NOT compatible with:
 Make sure the directives in crisp_utils are loaded by each file that needs testing, and then sprinkle your code with test/2 predicates. Files under test need not be modules, and predicates under test need not be exported. Example with a module:
 
 	:- module(concatenate, [concatenate/3]).
-	:- ensure_loaded('path/to/crisp_utils').
+	:- ensure_loaded('../crisp_utils').
 
 	test(concatenate/3, Goals) :-
 		Goals = [ true
