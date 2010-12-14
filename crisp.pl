@@ -3,13 +3,13 @@
 % MIT License (http://www.opensource.org/licenses/mit-license.php)
 % Copyright (c) 2010, Sebastian Lundstrom.
 
-:- module(crisp, [crisp/0]).
+:- module(crisp, [crisp/0, crisp_version/1]).
 
-%%  version(?VersionAsList)
+%%  crisp_version(?VersionAsList)
 %
 %   True if VersionAsList is [Major,Minor,Patch].
 
-version([0,0,1]).
+crisp_version([0,0,1]).
 
 %%  crisp
 %
@@ -209,7 +209,7 @@ write_summary(stats(Pass,Fail)) :-
     nl.
 
 write_prologue :-
-    version(Version),
+    crisp_version(Version),
     write('Crisp '), write_version_list(Version), nl.
 
 write_version_list([X]) :-
