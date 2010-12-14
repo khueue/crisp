@@ -38,7 +38,7 @@ Then, simply issue a call to crisp/0:
 
 	Module: concatenate
 	- concatenate/3
-	  !!! fail: concatenate([1,2],[3,4],[1])
+	  !!! FAIL: concatenate([1,2],[3,4],[1])
 	  => 1/4 fail, 3/4 pass
 
 	Summary: 1/4 fail, 3/4 pass

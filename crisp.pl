@@ -172,7 +172,7 @@ write_ratio(Some/All) :-
 write_result(pass, _Goal).
 write_result(fail, Goal) :-
     nl,
-    write('  !!! fail: '), write(Goal).
+    write('  !!! FAIL: '), write(Goal).
 
 write_summary(stats(Pass,Fail)) :-
     nl,
