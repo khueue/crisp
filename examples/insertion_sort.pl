@@ -1,6 +1,6 @@
 :- module(insertion_sort, [insertion_sort/3]).
 
-:- ensure_loaded('../crisp_utils').
+:- include('../crisp_utils').
 :- use_module('sort_utils').
 
 %%  insertion_sort(+List, +Relation, ?SortedList)
