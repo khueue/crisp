@@ -2,6 +2,8 @@
 
 :- module(sort_utils, [check/3]).
 
+:- ensure_loaded('../crisp_utils').
+
 %%  check(+RelationPredicate, ?X, ?Y)
 %
 %   True if RelationPredicate(X, Y) is true.
