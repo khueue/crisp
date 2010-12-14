@@ -7,7 +7,6 @@ Crisp is a tiny unit testing tool designed for ease of use and simplicity. It is
 Crisp should be compatible with at least:
 
  * SWI-Prolog 5.10.2
-
  * SICStus 3.12.5
 
 Crisp is NOT compatible with:
@@ -57,9 +56,7 @@ Simply call crisp/0 to run all tests:
 Special forms of test goals:
 
  * true - Simply ignored. It's just a trick to make the remaining test cases line up nicely with the commas.
-
  * one:Goal - Fails if Goal does not have exactly one solution. Basically just does a findall and checks the number of answers.
-
  * fail:Goal - Succeeds if Goal fails. Basically the same as \\+Goal.
 
 For a full test run of all the examples included with Crisp:
