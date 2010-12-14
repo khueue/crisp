@@ -17,12 +17,12 @@ Crisp is NOT compatible with:
 
 ## Usage
 
-First, make sure the directives in crisp_utils.pl are loaded by each file that needs testing. These directives let us define test/2 predicates in many places in many files:
+First make sure the directives in crisp_utils.pl are included in each file that needs testing (adequately solved by a call to include/1). These directives let us define test/2 predicates in several places and files:
 
 	:- multifile test/2.
 	:- discontiguous test/2.
 
-Then sprinkle your code with test/2 predicates, where the first argument is a label for the test (name and arity of the tested predicate might be a good idea), and the second argument is a list of goals that are supposed to succeed. Files under test need not be modules, and predicates under test need not be exported -- Crisp traverses all loaded modules, including the top level. Example using a module:
+Then sprinkle your code with test/2 predicates, where the first argument is a label for the test (name and arity of the tested predicate might be a good candidate), and the second argument is a list of goals that are supposed to succeed. Files with tests need not be modules, and predicates with tests need not be exported -- Crisp traverses all loaded modules, including the top "user" level. Example using a module:
 
 	:- module(concatenate, [concatenate/3]).
 
