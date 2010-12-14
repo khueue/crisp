@@ -1,5 +1,6 @@
 # Crisp - Crazy Simple Unit Testing in Prolog
 
+
 ## Compatibility
 
 Crisp should be compatible with:
@@ -12,9 +13,10 @@ Crisp is NOT compatible with:
 
  * GNU Prolog (due to its lack of a proper module system)
 
+
 ## Usage
 
-Make sure the directives in crisp_utils are loaded by each file (module or not) that needs testing, and then sprinkle your code with test/2 predicates:
+Make sure the directives in crisp_utils are loaded by each file that needs testing, and then sprinkle your code with test/2 predicates. Files under test need not be modules, and predicates under test need not be exported. Example with a module:
 
 	:- module(concatenate, [concatenate/3]).
 	:- ensure_loaded('path/to/crisp_utils').
@@ -31,7 +33,7 @@ Make sure the directives in crisp_utils are loaded by each file (module or not) 
 	concatenate([X|L1], L2, [X|L3]) :-
 	    concatenate(L1, L2, L3).
 
-Then, simply issue a call to crisp/0:
+Then, simply call crisp/0 to run all tests:
 
 	?- crisp.
 	Crisp 0.0.1
@@ -45,11 +47,11 @@ Then, simply issue a call to crisp/0:
 
 	true.
 
-Special forms of goals:
+Special forms of test goals:
 
  * true - Simply ignored. It's just a trick to make the remaining test cases line up nicely with the commas.
 
- * one:Goal - Fails if Goal has more than one answer (basically just does a findall and checks the number of answers).
+ * one:Goal - Fails if Goal has more than one answer. Basically just does a findall and checks the number of answers.
 
  * fail:Goal - Succeeds if Goal fails. Basically the same as \\+Goal.
 

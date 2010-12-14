@@ -74,11 +74,17 @@ run_module(Module, Stats0, Stats) :-
 all_tests_in_module(Module, Tests) :-
     findall(test(Name,Goals), Module:test(Name,Goals), Tests).
 
-run_all_tests([], _Module, Stats, Stats).
-run_all_tests([test(Name,Goals)|Tests], Module, Stats0, Stats) :-
+run_all_tests([], _Module, Stats, Stats) :-
+    !,
+    write('- No test/2 found.'), nl.
+run_all_tests(Tests, Module, Stats0, Stats) :-
+    run_all_tests_aux(Tests, Module, Stats0, Stats).
+
+run_all_tests_aux([], _Module, Stats, Stats).
+run_all_tests_aux([test(Name,Goals)|Tests], Module, Stats0, Stats) :-
     run_test(test(Name,Goals), Module, TestStats),
     add_stats(Stats0, TestStats, Stats1),
-    run_all_tests(Tests, Module, Stats1, Stats).
+    run_all_tests_aux(Tests, Module, Stats1, Stats).
 
 run_test(test(Name,Goals), Module, TestStats) :-
     write_test_name(Name),
