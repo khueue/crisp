@@ -10,8 +10,8 @@
 
 test(selection_sort/3, Goals) :-
     Goals = [ true
-    , selection_sort([], <, [])
-    , selection_sort([1], <, [1])
+    , selection_sort([], _, [])
+    , selection_sort([1], _, [1])
     , selection_sort([1,2,3,4,5], <, [1,2,3,4,5])
     , selection_sort([5,4,3,2,1], <, [1,2,3,4,5])
     , selection_sort([1,1,1,1,1], <, [1,1,1,1,1])

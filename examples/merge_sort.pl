@@ -10,7 +10,7 @@
 
 test(merge_sort/3, Goals) :-
     Goals = [ true
-    , merge_sort([], <, [])
+    , merge_sort([], _, [])
     , (merge_sort([4,2,3,1,-1], <, S1), S1 = [-1,1,2,3,4])
     , (merge_sort([4,2,3,1,-1], >=, S2), S2 = [4,3,2,1,-1])
     , one:merge_sort([4,2,3,1,-1], >=, _)

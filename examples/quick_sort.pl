@@ -10,8 +10,8 @@
 
 test(quick_sort/3, Goals) :-
     Goals = [ true
-    , quick_sort([], <, [])
-    , quick_sort([1], <, [1])
+    , quick_sort([], _, [])
+    , quick_sort([1], _, [1])
     , quick_sort([1,2,3,4,5], <, [1,2,3,4,5])
     , quick_sort([5,4,3,2,1], <, [1,2,3,4,5])
     , quick_sort([1,1,1,1,1], <, [1,1,1,1,1])
