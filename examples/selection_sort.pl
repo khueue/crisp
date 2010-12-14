@@ -17,7 +17,7 @@ test(selection_sort/3, Goals) :-
     , selection_sort([1,1,1,1,1], <, [1,1,1,1,1])
     , selection_sort([1,2,3,1,2,3], >=, [3,3,2,2,1,1])
     , selection_sort([3,2,1,3,2,1], >=, [3,3,2,2,1,1])
-    , one/selection_sort([3,2,1,3,2,1], >=, _)
+    , one:selection_sort([3,2,1,3,2,1], >=, _)
     ].
 
 selection_sort([], _, []) :- !.
@@ -31,14 +31,14 @@ selection_sort(L, Rel, [Extremum|Sorted]) :-
 
 test(extract_extremum/4, Goals) :-
     Goals = [ true
-    , fail/extract_extremum([], _, _, _)
+    , fail:extract_extremum([], _, _, _)
     , extract_extremum([3], <, 3, [])
     , extract_extremum([2,3,4,5,6,1], <, 1, [2,3,4,5,6])
     , extract_extremum([6,5,4,3,2,1], <, 1, [6,5,4,3,2])
     , extract_extremum([1,6,5,4,3,2], <, 1, [6,5,4,3,2])
     , extract_extremum([1,2,3,4,5,6], <, 1, [2,3,4,5,6])
     , extract_extremum([5,2,4,0,1,3], <, 0, [5,2,4,1,3])
-    , one/extract_extremum([5,5,5,5], =<, _, _)
+    , one:extract_extremum([5,5,5,5], =<, _, _)
     ].
 
 extract_extremum([Extremum], _, Extremum, []) :- !.
@@ -57,7 +57,7 @@ test(relate/5, Goals) :-
     , relate(1, 2, >, 2, 1)
     , relate(2, 2, >=, 2, 2)
     , relate(2, 2, >, 2, 2)
-    , one/relate(1, 1, >=, _, _)
+    , one:relate(1, 1, >=, _, _)
     ].
 
 relate(Winner, Loser, Rel, Winner, Loser) :-

@@ -18,7 +18,7 @@ test(quick_sort/3, Goals) :-
     , quick_sort([1,2,3,1,2,3], >=, [3,3,2,2,1,1])
     , quick_sort([3,2,1,3,2,1], >=, [3,3,2,2,1,1])
     , (quick_sort([3,2,1,3,2,1], >=, S1), S1 = [3,3,2,2,1,1])
-    , one/quick_sort([3,2,1,3,2,1], >=, _)
+    , one:quick_sort([3,2,1,3,2,1], >=, _)
     ].
 
 quick_sort(L, Rel, S) :-
@@ -58,7 +58,7 @@ test(partition/5, Goals) :-
     , partition([1,1,1], =<, 1, [1,1,1], [])
     , partition([1,1,1], >=, 1, [1,1,1], [])
     , partition([1,1,1], >, 1, [], [1,1,1])
-    , one/partition([1,1,1], >, 1, _, _)
+    , one:partition([1,1,1], >, 1, _, _)
     ].
 
 partition([], _, _, [], []).

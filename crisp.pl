@@ -96,16 +96,16 @@ run_goals([], _Module, Stats, Stats).
 run_goals([true|Goals], Module, Stats0, Stats) :-
     !,
     run_goals(Goals, Module, Stats0, Stats).
-run_goals([one/Goal|Goals], Module, Stats0, Stats) :-
+run_goals([one:Goal|Goals], Module, Stats0, Stats) :-
     !,
     execute_deterministic_test(Goal, Module, Result),
-    write_result(Result, one/Goal),
+    write_result(Result, one:Goal),
     update_stats(Result, Stats0, Stats1),
     run_goals(Goals, Module, Stats1, Stats).
-run_goals([fail/Goal|Goals], Module, Stats0, Stats) :-
+run_goals([fail:Goal|Goals], Module, Stats0, Stats) :-
     !,
     execute_test(\+(Goal), Module, Result),
-    write_result(Result, fail/Goal),
+    write_result(Result, fail:Goal),
     update_stats(Result, Stats0, Stats1),
     run_goals(Goals, Module, Stats1, Stats).
 run_goals([Goal|Goals], Module, Stats0, Stats) :-
@@ -133,7 +133,8 @@ update_stats(fail, stats(P,Fail0), stats(P,Fail)) :-
     Fail is Fail0 + 1.
 
 write_module_header(Module) :-
-    write('### Module: '), write(Module), nl.
+    nl,
+    write('Module: '), write(Module), nl.
 
 write_test_name(Pred/Arity) :-
     !,
@@ -147,7 +148,7 @@ write_stats(stats(Pass,0)) :-
 write_stats(Stats) :-
     % At least one test failed.
     nl,
-    write('        => '), write_fail(Stats),
+    write('  => '), write_fail(Stats),
     write(', '), write_pass(Stats), nl.
 
 write_pass(stats(Pass,Fail)) :-
@@ -171,7 +172,7 @@ write_ratio(Some/All) :-
 write_result(pass, _Goal).
 write_result(fail, Goal) :-
     nl,
-    write('    >>> fail/ '), write(Goal).
+    write('  !!! fail: '), write(Goal).
 
 write_summary(stats(Pass,Fail)) :-
     nl,
@@ -183,8 +184,7 @@ write_summary(stats(Pass,Fail)) :-
 
 write_prologue :-
     version(Version),
-    write('Crisp '), write_version_list(Version), nl,
-    nl.
+    write('Crisp '), write_version_list(Version), nl.
 
 write_version_list([X]) :-
     !,
