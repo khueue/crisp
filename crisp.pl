@@ -3,7 +3,7 @@
 % MIT License (http://www.opensource.org/licenses/mit-license.php)
 % Copyright (c) 2010, Sebastian Lundstrom.
 
-:- module(crisp, [crisp/0, version/1]).
+:- module(crisp, [crisp/0]).
 
 %%  version(?VersionAsList)
 %

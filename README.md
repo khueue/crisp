@@ -25,6 +25,7 @@ First, make sure the directives in crisp_utils.pl are loaded by each file that n
 Then sprinkle your code with test/2 predicates, where the first argument is a label for the test (name and arity of the tested predicate might be a good idea), and the second argument is a list of goals that are supposed to succeed. Files under test need not be modules, and predicates under test need not be exported -- Crisp traverses all loaded modules, including the top level. Example using a module:
 
 	:- module(concatenate, [concatenate/3]).
+
 	:- ensure_loaded('../crisp_utils').
 
 	test(concatenate/3, Goals) :-

@@ -1,4 +1,5 @@
 :- module(concatenate, [concatenate/3]).
+
 :- ensure_loaded('../crisp_utils').
 
 test(concatenate/3, Goals) :-

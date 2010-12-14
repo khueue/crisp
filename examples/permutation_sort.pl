@@ -52,7 +52,7 @@ permutation([X|Xs], Permutation) :-
 %   insert(+List, +Elem, ?ListWithElem)
 %   insert(?List, +Elem, +ListWithElem)
 %
-%   True if ListWithX is List with Elem inserted somewhere.
+%   True if ListWithElem is List with Elem inserted somewhere.
 
 test(insert/3, Goals) :-
     Goals = [ true
