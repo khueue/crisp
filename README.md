@@ -36,10 +36,10 @@ Then, simply issue a call to crisp/0:
 	?- crisp.
 	Crisp 0.0.1
 
-	### Module: concatenate
+	Module: concatenate
 	- concatenate/3
-	    >>> fail: concatenate([1,2],[3,4],[1])
-	        => 1/4 fail, 3/4 pass
+	  !!! fail: concatenate([1,2],[3,4],[1])
+	  => 1/4 fail, 3/4 pass
 
 	Summary: 1/4 fail, 3/4 pass
 
