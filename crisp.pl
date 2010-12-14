@@ -66,6 +66,26 @@ ignored_module(clpfd).
 ignored_module(prolog).
 ignored_module('SU_messages').
 
+/*
+
+% Think long and hard about this:
+
+fix(Tuple, [Test|Tests]) :-
+    Tuple =.. [',',Test,TupleRest],
+    !,
+    fix(TupleRest, Tests).
+fix(Test, [Test]).
+
+all_tests_in_module(Module, Tests) :-
+    findall(
+        Test,
+            (clause(Module:test(Name), Tuple),
+            fix(Tuple, GoalList),
+            Test = test(Name,GoalList)),
+        Tests).
+
+*/
+
 run_module(Module, Stats0, Stats) :-
     write_module_header(Module),
     all_tests_in_module(Module, Tests),
