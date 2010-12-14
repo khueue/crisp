@@ -64,12 +64,12 @@ Special forms of test goals:
 
 For a full test run of all the examples included with Crisp:
 
- # Clone this repository.
+ 1 Clone this repository.
 
- # Step into the project root.
+ 2 Step into the project root.
 
- # Start SWI-Prolog.
+ 3 Start SWI-Prolog.
 
- # ?- [crisp, 'examples/*'].
+ 4 ?- [crisp, 'examples/*'].
 
- # ?- crisp.
+ 5 ?- crisp.
