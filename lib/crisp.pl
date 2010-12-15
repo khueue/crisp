@@ -7,6 +7,7 @@
 %   - Numbers for failing tests? In lack of line number indication.
 %   - Look into copy_term/2 for solving the problem of tying up all
 %     variables in a goal list.
+%   - Redisplay failing tests at end of report.
 
 :- module(crisp, [crisp/0, crisp_version/1]).
 

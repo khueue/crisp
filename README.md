@@ -70,8 +70,9 @@ Simply call crisp/0 to run all tests:
 	- concatenate/3
 	  !!! FAIL: concatenate([1,2],[3,4],[1])
 	  => 1/4 fail, 3/4 pass
+	- concatenate_dl/3 => all/6 pass
 
-	Summary: 1/4 fail, 3/4 pass
+	Summary: 1/10 fail, 9/10 pass
 	true.
 
 Some syntactic sugar for test goals:
