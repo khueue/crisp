@@ -2,6 +2,7 @@
 
 Crisp is a tiny unit testing tool designed for ease of use and simplicity. It is basically just a wrapper around a very basic idea: keeping small and simple tests close to the code at hand.
 
+
 ## Compatibility
 
 Crisp 0.0.1 should be compatible with at least:
@@ -51,7 +52,6 @@ Simply call crisp/0 to run all tests:
 	  => 1/4 fail, 3/4 pass
 
 	Summary: 1/4 fail, 3/4 pass
-
 	true.
 
 Special forms of test goals:
