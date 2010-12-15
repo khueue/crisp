@@ -54,10 +54,10 @@ Simply call crisp/0 to run all tests:
 	Summary: 1/4 fail, 3/4 pass
 	true.
 
-Special forms of test goals:
+Some syntactic sugar for goals:
 
  * true - Simply ignored. It's just a trick to make the remaining test cases line up nicely with the commas.
- * one:Goal - Fails if Goal does not have exactly one solution. Basically just does a findall and checks the number of answers.
+ * one:Goal - Succeeds if Goal has exactly one solution. Basically just does a findall and checks the number of solutions.
  * fail:Goal - Succeeds if Goal fails. Basically the same as \\+Goal.
 
 For a full test run of all the examples included with Crisp:
