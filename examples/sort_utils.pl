@@ -2,7 +2,7 @@
 
 :- module(sort_utils, [check/3]).
 
-:- include('../crisp_utils').
+:- include('../lib/crisp_utils').
 
 %%  check(+RelationPredicate, ?X, ?Y)
 %

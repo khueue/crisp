@@ -1,6 +1,6 @@
 :- module(fib, [fib/2]).
 
-:- include('../crisp_utils').
+:- include('../lib/crisp_utils').
 
 %%  fib(+Nth, +NthFib)
 %

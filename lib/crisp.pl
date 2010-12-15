@@ -1,9 +1,9 @@
-% Crisp - Crazy Simple Unit Testing in Prolog
+%   Crisp - Crazy Simple Unit Testing in Prolog
 %
-% MIT License (http://www.opensource.org/licenses/mit-license.php)
-% Copyright (c) 2010, Sebastian Lundstrom.
+%   MIT License (http://www.opensource.org/licenses/mit-license.php)
+%   Copyright (c) 2010, Sebastian Lundstrom.
 %
-% Todo: Numbers for failing tests? In lack of line numbers.
+%   Todo: Numbers for failing tests? In lack of line numbers.
 
 :- module(crisp, [crisp/0, crisp_version/1]).
 
@@ -88,19 +88,22 @@ ignored_module(prolog).
 
 % Think long and hard about this:
 
-fix(Tuple, [Test|Tests]) :-
-    Tuple =.. [',',Test,TupleRest],
+tuple_to_list(Tuple, [Head|Elements]) :-
+    Tuple =.. [',',Head,Tail],
     !,
-    fix(TupleRest, Tests).
-fix(Test, [Test]).
+    tuple_to_list(Tail, Elements).
+tuple_to_list(Element, [Element]).
+    % Element is not a tuple.
+
+*/
+/*
 
 all_tests_in_module(Module, Tests) :-
-    findall(
-        Test,
-            (clause(Module:test(Name), Tuple),
-            fix(Tuple, GoalList),
-            Test = test(Name,GoalList)),
-        Tests).
+    findall(test(Name,Goals), all_goals_in_test(Module, Name, Goals), Tests).
+
+all_goals_in_test(Module, Name, Goals) :-
+    clause(Module:test(Name), Tuple),
+    tuple_to_list(Tuple, Goals).
 
 */
 

@@ -1,4 +1,5 @@
-%   Required definitions for all files defining test/2.
+%   Include the contents of this file before defining any test/2 predicates.
+%   Can be achieved by a call to include/1 at the top of each file.
 
 %   Let test/2 be defined over several files instead of each file
 %   overwriting old definitions.

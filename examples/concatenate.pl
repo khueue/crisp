@@ -1,6 +1,6 @@
 :- module(concatenate, [concatenate/3]).
 
-:- include('../crisp_utils').
+:- include('../lib/crisp_utils').
 
 test(concatenate/3, Goals) :-
 	Goals = [ true

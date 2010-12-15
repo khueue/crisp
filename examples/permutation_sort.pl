@@ -1,6 +1,6 @@
 :- module(permutation_sort, [permutation_sort/3]).
 
-:- include('../crisp_utils').
+:- include('../lib/crisp_utils').
 :- use_module('sort_utils').
 
 %%  permutation_sort(+List, +Relation, ?SortedList)
