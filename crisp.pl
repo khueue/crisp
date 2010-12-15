@@ -82,7 +82,6 @@ ignored_module(terms).
 ignored_module(charsio).
 ignored_module(attributes).
 ignored_module(idb).
-ignored_module(user).
 ignored_module(prolog).
 
 /*
