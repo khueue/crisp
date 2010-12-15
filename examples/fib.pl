@@ -7,8 +7,8 @@
 %   True if NthFib is the Nth Fibonacci number, starting with base cases
 %   (0, 0) and (1, 1).
 
-test(fib/2, Goals) :-
-    Goals = [ true
+test(fib/2,
+    [ true
     , fail:fib(-1, _)
     , fib(0, 0)
     , fib(1, 1)
@@ -18,7 +18,7 @@ test(fib/2, Goals) :-
     , fib(5, 5)
     , fib(6, 8)
     , one:fib(6, _)
-    ].
+    ]).
 
 fib(N, Fib) :-
     fib(N, 0, 1, Fib).
@@ -27,8 +27,8 @@ fib(N, Fib) :-
 %
 %   Tail-recursive helper.
 
-test(fib/4, Goals) :-
-    Goals = [ true
+test(fib/4, 
+    [ true
     , fail:fib(-1, _, _, _)
     , fib(0, 0, 1, 0)
     , fib(1, 0, 1, 1)
@@ -38,7 +38,7 @@ test(fib/4, Goals) :-
     , fib(5, 0, 1, 5)
     , fib(6, 0, 1, 8)
     , one:fib(6, 0, 1, _)
-    ].
+    ]).
 
 fib(0, Fib, _, Fib) :- !.
 fib(N, F0, F1, Fib) :-

@@ -25,21 +25,41 @@ First make sure the directives in crisp_utils.pl are included in each file that 
 
 Then sprinkle your code with test/2 predicates, where the first argument is a label for the test (name and arity of the tested predicate might be a good candidate), and the second argument is a list of goals that are supposed to succeed. Files with tests need not be modules, and predicates with tests need not be exported -- Crisp traverses all loaded modules, including the top "user" level. Example using a module:
 
-	:- module(concatenate, [concatenate/3]).
+	:- module(concatenate, [concatenate/3, concatenate_dl/3]).
 
 	:- include('../lib/crisp_utils').
 
-	test(concatenate/3, Goals) :-
-		Goals = [ true
+	%%  concatenate
+	%
+	%   Linear (normal) list concatenation, linear in the left list.
+
+	test(concatenate/3,
+	    [ true
 		, concatenate([1,2], [3,4], [1,2,3,4])
 		, concatenate([1,2], [3,4], [1])
 		, one:concatenate([1,2], [3,4], _)
 		, fail:concatenate([1,2], [3,4], [3,4,1,2])
-		].
+		]).
 
 	concatenate([], L2, L2).
 	concatenate([X|L1], L2, [X|L3]) :-
 	    concatenate(L1, L2, L3).
+
+	%%  concatenate_dl
+	%
+	%   Constant-time list concatenation using difference lists.
+
+	test(concatenate_dl/3,
+	    [ true
+	    , concatenate_dl([]-[], []-[], []-[])
+	    , Conc0 = [1,2|T1]-T1
+	    , concatenate_dl(Conc0, [3,4|T2]-T2, Conc1)
+	    , Conc1 = [1,2,3,4|_]-_
+	    , concatenate_dl(Conc1, [5,6|T3]-T3, Conc2)
+	    , Conc2 = [1,2,3,4,5,6|_]-_
+	    ]).
+
+	concatenate_dl(X-Y, Y-Z, X-Z).
 
 Simply call crisp/0 to run all tests:
 
@@ -54,7 +74,7 @@ Simply call crisp/0 to run all tests:
 	Summary: 1/4 fail, 3/4 pass
 	true.
 
-Some syntactic sugar for goals:
+Some syntactic sugar for test goals:
 
  * true - Simply ignored. It's just a trick to make the remaining test cases line up nicely with the commas.
  * one:Goal - Succeeds if Goal has exactly one solution. Basically just does a findall and checks the number of solutions.
@@ -62,7 +82,7 @@ Some syntactic sugar for goals:
 
 For a full test run of all the examples included with Crisp:
 
- 1. Clone this repository.
- 2. Start SWI-Prolog in the project root.
+ 1. Clone the repository.
+ 2. Start SWI-Prolog in the root of the repository.
  3. ?- ['lib/crisp', 'examples/*'].
  4. ?- crisp.

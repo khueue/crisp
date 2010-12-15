@@ -8,8 +8,8 @@
 %   True if SortedList is a permutation of List such that Relation(A, B)
 %   is true for any two consecutive elements A and B in SortedList.
 
-test(permutation_sort/3, Goals) :-
-    Goals = [ true
+test(permutation_sort/3,
+    [ true
     , permutation_sort([], _, [])
     , permutation_sort([1], _, [1])
     , permutation_sort([1,2,3,4,5], <, [1,2,3,4,5])
@@ -19,7 +19,7 @@ test(permutation_sort/3, Goals) :-
     , permutation_sort([3,2,1,3,2,1], >=, [3,3,2,2,1,1])
     , (permutation_sort([3,2,1,3,2,1], >=, S1), S1 = [3,3,2,2,1,1])
     , one:permutation_sort([3,2,1,3,2,1], >=, _)
-    ].
+    ]).
 
 permutation_sort(List, Rel, Sorted) :-
     permutation(List, Sorted),
@@ -30,8 +30,8 @@ permutation_sort(List, Rel, Sorted) :-
 %
 %   True if Permutation is a permutation of List.
 
-test(permutation/2, Goals) :-
-    Goals = [ true
+test(permutation/2,
+    [ true
     , permutation([], [])
     , permutation([1], [1])
     , permutation([1,2], [1,2])
@@ -42,7 +42,7 @@ test(permutation/2, Goals) :-
     , permutation([1,2,3], [2,3,1])
     , permutation([1,2,3], [3,1,2])
     , permutation([1,2,3], [3,2,1])
-    ].
+    ]).
 
 permutation([], []).
 permutation([X|Xs], Permutation) :-
@@ -54,15 +54,15 @@ permutation([X|Xs], Permutation) :-
 %
 %   True if ListWithElem is List with Elem inserted somewhere.
 
-test(insert/3, Goals) :-
-    Goals = [ true
+test(insert/3,
+    [ true
     , insert([], 1, [1])
     , insert([2], 1, [1,2])
     , insert([2], 1, [2,1])
     , insert([3,2], 1, [1,3,2])
     , insert([3,2], 1, [3,1,2])
     , insert([3,2], 1, [3,2,1])
-    ].
+    ]).
 
 insert(L, Elem, [Elem|L]).
 insert([X|L1], Elem, [X|L2]) :-
@@ -73,8 +73,8 @@ insert([X|L1], Elem, [X|L2]) :-
 %   True if Relation(A, B) is true for any two consecutive elements A and B
 %   in List.
 
-test(is_sorted/2, Goals) :-
-    Goals = [ true
+test(is_sorted/2,
+    [ true
     , is_sorted([], _)
     , is_sorted([1], _)
     , is_sorted([1,2], <)
@@ -82,7 +82,7 @@ test(is_sorted/2, Goals) :-
     , is_sorted([1,2,3,3], =<)
     , one:is_sorted([1,2,3,3,3], =<)
     , fail:is_sorted([1,2,3,3,2], =<)
-    ].
+    ]).
 
 is_sorted([], _).
 is_sorted([_], _) :- !.

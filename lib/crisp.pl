@@ -3,7 +3,10 @@
 %   MIT License (http://www.opensource.org/licenses/mit-license.php)
 %   Copyright (c) 2010, Sebastian Lundstrom.
 %
-%   Todo: Numbers for failing tests? In lack of line numbers.
+%   Todo:
+%   - Numbers for failing tests? In lack of line number indication.
+%   - Look into copy_term/2 for solving the problem of tying up all
+%     variables in a goal list.
 
 :- module(crisp, [crisp/0, crisp_version/1]).
 

@@ -8,8 +8,8 @@
 %   True if SortedList is a permutation of List such that Relation(A, B)
 %   is true for any two consecutive elements A and B in SortedList.
 
-test(selection_sort/3, Goals) :-
-    Goals = [ true
+test(selection_sort/3,
+    [ true
     , selection_sort([], _, [])
     , selection_sort([1], _, [1])
     , selection_sort([1,2,3,4,5], <, [1,2,3,4,5])
@@ -18,7 +18,7 @@ test(selection_sort/3, Goals) :-
     , selection_sort([1,2,3,1,2,3], >=, [3,3,2,2,1,1])
     , selection_sort([3,2,1,3,2,1], >=, [3,3,2,2,1,1])
     , one:selection_sort([3,2,1,3,2,1], >=, _)
-    ].
+    ]).
 
 selection_sort([], _, []) :- !.
 selection_sort(L, Rel, [Extremum|Sorted]) :-
@@ -29,8 +29,8 @@ selection_sort(L, Rel, [Extremum|Sorted]) :-
 %
 %   Separates the extremum from all other elements of List.
 
-test(extract_extremum/4, Goals) :-
-    Goals = [ true
+test(extract_extremum/4,
+    [ true
     , fail:extract_extremum([], _, _, _)
     , extract_extremum([3], <, 3, [])
     , extract_extremum([2,3,4,5,6,1], <, 1, [2,3,4,5,6])
@@ -39,7 +39,7 @@ test(extract_extremum/4, Goals) :-
     , extract_extremum([1,2,3,4,5,6], <, 1, [2,3,4,5,6])
     , extract_extremum([5,2,4,0,1,3], <, 0, [5,2,4,1,3])
     , one:extract_extremum([5,5,5,5], =<, _, _)
-    ].
+    ]).
 
 extract_extremum([Extremum], _, Extremum, []) :- !.
 extract_extremum([X,Y|Xs], Rel, Extremum, [Other|Others]) :-
@@ -51,14 +51,14 @@ extract_extremum([X,Y|Xs], Rel, Extremum, [Other|Others]) :-
 %   Relates X and Y using Relation(X, Y) such that Winner is the first
 %   of X and Y that satisfies the relation, and Loser is the other.
 
-test(relate/5, Goals) :-
-    Goals = [ true
+test(relate/5,
+    [ true
     , relate(1, 2, <, 1, 2)
     , relate(1, 2, >, 2, 1)
     , relate(2, 2, >=, 2, 2)
     , relate(2, 2, >, 2, 2)
     , one:relate(1, 1, >=, _, _)
-    ].
+    ]).
 
 relate(Winner, Loser, Rel, Winner, Loser) :-
     check(Rel, Winner, Loser),
