@@ -65,5 +65,5 @@ For a full test run of all the examples included with Crisp:
  1. Clone this repository.
  2. Step into the project root.
  3. Start SWI-Prolog.
- 4. ?- [crisp, 'examples/*'].
+ 4. ?- ['lib/crisp', 'examples/*'].
  5. ?- crisp.
