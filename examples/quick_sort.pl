@@ -1,6 +1,7 @@
 :- module(quick_sort, [quick_sort/3]).
 
 :- include('../lib/crisp_includes').
+
 :- use_module('sort_utils').
 
 %%  quick_sort(+List, +Relation, ?SortedList)
