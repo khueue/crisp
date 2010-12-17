@@ -2,7 +2,6 @@
 
 Crisp is a tiny unit testing tool designed for ease of use and simplicity. It is basically just a wrapper around a very basic idea: keeping small and simple tests close to the code at hand.
 
-
 ## Compatibility
 
 Crisp  should be compatible with at least:
@@ -14,7 +13,6 @@ Crisp  should be compatible with at least:
 Crisp is NOT compatible with:
 
  * GNU Prolog (due to its lack of a proper module system)
-
 
 ## Usage
 

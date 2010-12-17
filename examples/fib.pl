@@ -27,7 +27,7 @@ fib(N, Fib) :-
 %
 %   Tail-recursive helper.
 
-test(fib/4, 
+test(fib/4,
     [ true
     , fail:fib(-1, _, _, _)
     , fib(0, 0, 1, 0)

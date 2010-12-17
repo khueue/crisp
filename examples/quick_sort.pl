@@ -48,7 +48,7 @@ quick_sort([P|Xs], Rel, Sorted0, Sorted) :-
 %   Partitions List into Left and Right such that Relation(X, Pivot)
 %   is true for all elements X in Left.
 
-test(partition/5, 
+test(partition/5,
     [ true
     , partition([], _, _, [], [])
     , partition([1,2,3,4,5], <, 3, [1,2], [3,4,5])
