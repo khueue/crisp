@@ -32,4 +32,4 @@ test(concatenate_dl/3,
     , Conc2 = [1,2,3,4,5,6|_]-_
     ]).
 
-concatenate_dl(X-Y, Y-Z, X-Z).
+concatenate_dl(A-B, B-C, A-C).

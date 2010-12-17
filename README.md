@@ -23,7 +23,7 @@ First make sure the directives in crisp_utils.pl are included in each file that 
 	:- multifile test/2.
 	:- discontiguous test/2.
 
-Then sprinkle your code with test/2 predicates, where the first argument is a label for the test (name and arity of the tested predicate might be a good candidate), and the second argument is a list of goals that are supposed to succeed. Files with tests need not be modules, and predicates with tests need not be exported -- Crisp traverses all loaded modules, including the top "user" level. Example using a module:
+Then sprinkle your code with test/2 predicates, where the first argument is a label for the test (name and arity of the tested predicate might be a good candidate), and the second argument is a list of goals that are supposed to succeed. Files with tests need not be modules, and predicates with tests need not be exported -- Crisp traverses all loaded modules, including the top "user" level. Example using a module (examples/concatenate.pl):
 
 	:- module(concatenate, [concatenate/3, concatenate_dl/3]).
 
@@ -59,7 +59,7 @@ Then sprinkle your code with test/2 predicates, where the first argument is a la
 	    , Conc2 = [1,2,3,4,5,6|_]-_
 	    ]).
 
-	concatenate_dl(X-Y, Y-Z, X-Z).
+	concatenate_dl(A-B, B-C, A-C).
 
 Simply call crisp/0 to run all tests:
 
