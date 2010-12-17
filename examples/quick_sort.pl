@@ -27,7 +27,8 @@ quick_sort(L, Rel, S) :-
 
 %   quick_sort(+List, +Relation, ?SortedList0, ?SortedList)
 %
-%   Uses SortedList0 as an accumulator.
+%   Uses SortedList0 as an accumulator that holds sorted elements that
+%   should be inserted at the end of the final result.
 
 test(quick_sort/4,
     [ true
@@ -35,7 +36,7 @@ test(quick_sort/4,
     , quick_sort([1], <, [], [1])
     , quick_sort([], <, [1], [1])
     , quick_sort([4,9,2,4], <, [5,6,7], [2,4,4,9,5,6,7])
-    , quick_sort([3,1,2,4,5], >, [a,b,c], [5,4,3,2,1,a,b,c])
+    , quick_sort([3,1,2,4,5], @>, [c,a,b], [5,4,3,2,1,c,a,b])
     ]).
 
 quick_sort([], _, Sorted, Sorted).
