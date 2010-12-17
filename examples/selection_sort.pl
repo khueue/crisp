@@ -1,8 +1,8 @@
 :- module(selection_sort, [selection_sort/3]).
 
-:- include('../lib/crisp_includes').
-
 :- use_module('sort_utils').
+
+:- include('../lib/crisp_includes').
 
 %%  selection_sort(+List, +Relation, ?SortedList)
 %

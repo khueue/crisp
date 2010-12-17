@@ -1,8 +1,8 @@
 :- module(merge_sort, [merge_sort/3]).
 
-:- include('../lib/crisp_includes').
-
 :- use_module('sort_utils').
+
+:- include('../lib/crisp_includes').
 
 %%  merge_sort(+List, +Relation, ?SortedList)
 %
