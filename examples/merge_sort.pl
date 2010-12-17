@@ -19,8 +19,8 @@ test(merge_sort/3,
 
 merge_sort([], _, []) :- !.
 merge_sort([X], _, [X]) :- !.
-merge_sort([X,Y|Xs], Rel, Sorted) :-
-    split([X,Y|Xs], L1, L2),
+merge_sort(L, Rel, Sorted) :-
+    split(L, L1, L2),
     merge_sort(L1, Rel, S1),
     merge_sort(L2, Rel, S2),
     merge(S1, S2, Rel, Sorted).
@@ -54,6 +54,7 @@ test(merge/4,
     [ true
     , merge([], [], <, [])
     , merge([1,3,5], [2,4], <, [1,2,3,4,5])
+    , merge([1,1], [1,1,1], <, [1,1,1,1,1])
     ]).
 
 merge([], Ys, _, Ys) :- !.
