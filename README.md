@@ -16,7 +16,7 @@ Crisp is NOT compatible with:
 
 ## Usage
 
-First make sure the directives in crisp_includes.pl are included in each file that needs testing (adequately solved by a call to include/1). These directives let us define test/2 predicates in several places and files:
+First make sure the directives in lib/crisp_includes.pl are included in each file that needs testing (adequately solved by a call to include/1). These directives let us define test/2 predicates in several places and files:
 
     :- multifile test/2.
     :- discontiguous test/2.
