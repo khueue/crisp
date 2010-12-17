@@ -1,6 +1,6 @@
 :- module(concatenate, [concatenate/3, concatenate_dl/3]).
 
-:- include('../lib/crisp_utils').
+:- include('../lib/crisp_includes').
 
 %%  concatenate
 %

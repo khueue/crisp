@@ -1,6 +1,6 @@
 :- module(insertion_sort, [insertion_sort/3]).
 
-:- include('../lib/crisp_utils').
+:- include('../lib/crisp_includes').
 :- use_module('sort_utils').
 
 %%  insertion_sort(+List, +Relation, ?SortedList)
