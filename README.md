@@ -73,26 +73,32 @@ Simply call crisp/0 to run all tests:
     Summary: 1/10 fail, 9/10 pass
     true.
 
-Some syntactic sugar for test goals:
-
- * true - Simply ignored. It's just a trick to make the remaining test cases line up nicely with the commas.
- * one:Goal - Succeeds if Goal has exactly one solution. Basically just does a findall and checks the number of solutions.
- * fail:Goal - Succeeds if Goal fails. Basically the same as \\+Goal.
-
-Some hints when constructing tests:
-
- * If a predicate is supposed to only generate one answer, make sure to include a goal using "one:" described above. E.g.:
-
-        , one:quick_sort([3,2,1,3,2,1], >=, _)
-
- * When output arguments (documented as '?') can be instantiated beforehand, make sure to check both situations: instantiated beforehand and only validated by the predicate, and uninstantiated and then supplied by the predicate. E.g.:
-
-        , quick_sort([3,2,1,3,2,1], >=, [3,3,2,2,1,1])
-        , (quick_sort([3,2,1,3,2,1], >=, S1), S1 == [3,3,2,2,1,1])
-
 For a full test run of all the examples included with Crisp:
 
  1. Clone the repository.
  2. Start SWI-Prolog in the root of the repository.
  3. ?- ['lib/crisp', 'examples/*'].
  4. ?- crisp.
+
+## Other
+
+### Special Syntax
+
+ * true - Simply ignored. It's just a trick to make the remaining test cases line up nicely with the commas.
+ * one:Goal - Succeeds if Goal has exactly one solution. Basically just does a findall and checks the number of solutions.
+ * fail:Goal - Succeeds if Goal fails. Basically the same as \\+Goal.
+
+### Hints for Constructing Tests
+
+_Determinism._ If a predicate is supposed to generate only one answer, make sure to include a goal using "one:" described above. Example (underscore is fine because we are only interested in the fact that exactly one solution is generated, not the actual result):
+
+    ...
+    , one:quick_sort([3,2,1,3,2,1], >=, _)
+    ...
+
+_Output arguments._ When output arguments can be instantiated beforehand (often prefixed with '?' in documentation), make sure to check both situations: instantiated beforehand and only validated by the predicate, and uninstantiated and then supplied by the predicate. Example:
+
+    ...
+    , quick_sort([3,2,1,3,2,1], >=, [3,3,2,2,1,1])
+    , (quick_sort([3,2,1,3,2,1], >=, S1), S1 == [3,3,2,2,1,1])
+    ...
