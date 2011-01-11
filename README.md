@@ -14,9 +14,18 @@ Crisp is NOT compatible with:
 
  * GNU Prolog (due to its lack of a proper module system)
 
+## Quick Start
+
+For a full demonstration of Crisp running all the tests in the examples folder:
+
+ 1. Clone the repository.
+ 2. Start SWI-Prolog in the project root.
+ 3. ?- ['lib/crisp', 'examples/*'].
+ 4. ?- crisp.
+
 ## Usage
 
-First make sure the directives in lib/crisp_includes.pl are included in each file that needs testing (adequately solved by a call to include/1). These directives let us define test/2 predicates in several places and files:
+First make sure the directives in lib/crisp_includes.pl are included in each file that needs testing (adequately solved by a call to include/1). These included directives let us define test/2 predicates in several places and files:
 
     :- multifile test/2.
     :- discontiguous test/2.
@@ -73,30 +82,25 @@ Simply call crisp/0 to run all tests:
     Summary: 1/10 fail, 9/10 pass
     true.
 
-For a full test run of all the examples included with Crisp:
+## Miscellaneous
 
- 1. Clone the repository.
- 2. Start SWI-Prolog in the root of the repository.
- 3. ?- ['lib/crisp', 'examples/*'].
- 4. ?- crisp.
+### Special Forms of Goals
 
-## Other
+A test goal can be anything (supposed to evaluate to true), but Crisp provides the following syntactic sugar for convenience and readability:
 
-### Special Syntax
-
- * true - Simply ignored. It's just a trick to make the remaining test cases line up nicely with the commas.
- * one:Goal - Succeeds if Goal has exactly one solution. Basically just does a findall and checks the number of solutions.
- * fail:Goal - Succeeds if Goal fails. Basically the same as \\+Goal.
+ * _true_ - Ignored. It's just a (foul) trick to make the remaining test cases line up nicely with the commas (see the examples).
+ * _one:Goal_ - Succeeds if Goal has exactly one solution. Basically just does a findall and checks the number of solutions.
+ * _fail:Goal_ - Succeeds if Goal fails. Basically the same as \\+Goal.
 
 ### Hints for Constructing Tests
 
-_Determinism._ If a predicate is supposed to generate only one answer, make sure to include a goal using "one:" described above. Example (underscore is fine because we are only interested in the fact that exactly one solution is generated, not the actual result):
+_Determinism._ If a predicate is supposed to generate only one solution, make sure to include a goal using "one:" described above. Using underscores for output is fine, and encouraged, because it does not draw our attention to what the actual result is (other goals should check that), only that we get exactly one solution. Example:
 
     ...
     , one:quick_sort([3,2,1,3,2,1], >=, _)
     ...
 
-_Output arguments._ When output arguments can be instantiated beforehand (often prefixed with '?' in documentation), make sure to check both situations: instantiated beforehand and only validated by the predicate, and uninstantiated and then supplied by the predicate. Example:
+_Output arguments._ When output arguments may be instantiated beforehand (often prefixed with '?' in documentation), make sure to check both situations: instantiated beforehand and only validated by the predicate, and uninstantiated and then supplied by the predicate. Be sure to use exact comparisons, such as '==', when checking the generated result: in case the predicate (mistakenly) leaves the output unbound your check will succeed automatically. Example:
 
     ...
     , quick_sort([3,2,1,3,2,1], >=, [3,3,2,2,1,1])
