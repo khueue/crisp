@@ -8,6 +8,7 @@
 %   - Look into copy_term/2 for solving the problem of tying up all
 %     variables in a goal list. Or is that good behavior?
 %   - Redisplay failing tests at end of report.
+%   - Run only certain tests.
 
 :- module(crisp, [crisp/0, crisp_version/1]).
 

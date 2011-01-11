@@ -32,13 +32,14 @@ First make sure the directives in lib/crisp_includes.pl are included in each fil
 
 Then sprinkle your code with test/2 predicates, where the first argument is a label for the test (name and arity of the tested predicate might be a good candidate), and the second argument is a list of goals that are supposed to succeed. Files with tests need not be modules, and predicates with tests need not be exported -- Crisp traverses all loaded modules, including the top "user" level. Example using a module (examples/concatenate.pl):
 
-    :- module(concatenate, [concatenate/3, concatenate_dl/3]).
+    :- module(concatenate, [concatenate/3]).
 
     :- include('../lib/crisp_includes').
 
-    %%  concatenate
+    %%  concatenate(+List1, +List2, ?List1List2)
+    %   concatenate(?List1, ?List2, +List1List2)
     %
-    %   Linear (normal) list concatenation, linear in the left list.
+    %   True if List1List2 is the list concatenation of List1 and List2.
 
     test(concatenate/3,
         [ true
@@ -48,27 +49,11 @@ Then sprinkle your code with test/2 predicates, where the first argument is a la
         , fail:concatenate([1,2], [3,4], [3,4,1,2])
         ]).
 
-    concatenate([], L2, L2).
+    concatenate([], L, L).
     concatenate([X|L1], L2, [X|L3]) :-
         concatenate(L1, L2, L3).
 
-    %%  concatenate_dl
-    %
-    %   Constant-time list concatenation using difference lists.
-
-    test(concatenate_dl/3,
-        [ true
-        , concatenate_dl([]-[], []-[], []-[])
-        , Conc0 = [1,2|T1]-T1
-        , concatenate_dl(Conc0, [3,4|T2]-T2, Conc1)
-        , Conc1 = [1,2,3,4|_]-_
-        , concatenate_dl(Conc1, [5,6|T3]-T3, Conc2)
-        , Conc2 = [1,2,3,4,5,6|_]-_
-        ]).
-
-    concatenate_dl(A-B, B-C, A-C).
-
-Simply call crisp/0 to run all tests:
+Simply call `crisp.` to run all tests:
 
     ?- crisp.
     Crisp 0.0.1
@@ -77,9 +62,8 @@ Simply call crisp/0 to run all tests:
     - concatenate/3
       !!! FAIL: concatenate([1,2],[3,4],[1])
       => 1/4 fail, 3/4 pass
-    - concatenate_dl/3 => all/6 pass
 
-    Summary: 1/10 fail, 9/10 pass
+    Summary: 1/4 fail, 3/4 pass
     true.
 
 ## Miscellaneous

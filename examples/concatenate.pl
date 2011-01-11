@@ -1,10 +1,11 @@
-:- module(concatenate, [concatenate/3, concatenate_dl/3]).
+:- module(concatenate, [concatenate/3]).
 
 :- include('../lib/crisp_includes').
 
-%%  concatenate
+%%  concatenate(+List1, +List2, ?List1List2)
+%   concatenate(?List1, ?List2, +List1List2)
 %
-%   Linear (normal) list concatenation, linear in the left list.
+%   True if List1List2 is the list concatenation of List1 and List2.
 
 test(concatenate/3,
     [ true
@@ -17,19 +18,3 @@ test(concatenate/3,
 concatenate([], L, L).
 concatenate([X|L1], L2, [X|L3]) :-
     concatenate(L1, L2, L3).
-
-%%  concatenate_dl
-%
-%   Constant-time list concatenation using difference lists.
-
-test(concatenate_dl/3,
-    [ true
-    , concatenate_dl([]-[], []-[], []-[])
-    , Conc0 = [1,2|T1]-T1
-    , concatenate_dl(Conc0, [3,4|T2]-T2, Conc1)
-    , Conc1 = [1,2,3,4|_]-_
-    , concatenate_dl(Conc1, [5,6|T3]-T3, Conc2)
-    , Conc2 = [1,2,3,4,5,6|_]-_
-    ]).
-
-concatenate_dl(A-B, B-C, A-C).
