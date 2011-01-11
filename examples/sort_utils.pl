@@ -18,7 +18,7 @@ test(check/3,
     , check(@>=, aba, aba)
     , fail:check(@>, aba, aba)
     , check(is, 3, 1+2)
-    , (check(is, X, 1+2), X = 3)
+    , (check(is, X, 1+2), X == 3)
     , (check(is, Y, 5-1), Y \== 3)
     ]).
 

@@ -18,7 +18,7 @@ test(permutation_sort/3,
     , fail:permutation_sort([1,1,1,1,1], <, [1,1,1,1,1]) % Fails is_sorted!
     , permutation_sort([1,2,3,1,2,3], >=, [3,3,2,2,1,1])
     , permutation_sort([3,2,1,3,2,1], >=, [3,3,2,2,1,1])
-    , (permutation_sort([3,2,1,3,2,1], >=, S1), S1 = [3,3,2,2,1,1])
+    , (permutation_sort([3,2,1,3,2,1], >=, S1), S1 == [3,3,2,2,1,1])
     , one:permutation_sort([3,2,1,3,2,1], >=, _)
     ]).
 

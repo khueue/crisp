@@ -30,8 +30,8 @@ test(insertion_sort/4,
     [ true
     , insertion_sort([], <, [], [])
     , insertion_sort([3,2,1,4], <, [], [1,2,3,4])
-    , (insertion_sort([3,2,1], <, [4,5], S1), S1 = [1,2,3,4,5])
-    , (insertion_sort([3,2,1], <, [5,0], S2), S2 = [1,2,3,5,0])
+    , (insertion_sort([3,2,1], <, [4,5], S1), S1 == [1,2,3,4,5])
+    , (insertion_sort([3,2,1], <, [5,0], S2), S2 == [1,2,3,5,0])
     ]).
 
 insertion_sort([], _, Sorted, Sorted).
@@ -47,7 +47,7 @@ test(ordered_insert/4,
     , ordered_insert([1,3], 2, <, [1,2,3])
     , ordered_insert([1], 2, <, [1,2])
     , ordered_insert([1], 2, >, [2,1])
-    , (ordered_insert([1], 2, >, S), S = [2,1])
+    , (ordered_insert([1], 2, >, S), S == [2,1])
     ]).
 
 ordered_insert([], X, _, [X]).
