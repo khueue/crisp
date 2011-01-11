@@ -79,6 +79,17 @@ Some syntactic sugar for test goals:
  * one:Goal - Succeeds if Goal has exactly one solution. Basically just does a findall and checks the number of solutions.
  * fail:Goal - Succeeds if Goal fails. Basically the same as \\+Goal.
 
+Some hints when constructing tests:
+
+ * If a predicate is supposed to only generate one answer, make sure to include a goal using "one:" described above. E.g.:
+
+    one:quick_sort([3,2,1,3,2,1], >=, _)
+
+ * When output arguments (documented as '?') can be instantiated beforehand, make sure to check both situations: instantiated beforehand and only validated by the predicate, and uninstantiated and then supplied by the predicate. E.g.:
+
+    quick_sort([3,2,1,3,2,1], >=, [3,3,2,2,1,1])
+    (quick_sort([3,2,1,3,2,1], >=, S1), S1 == [3,3,2,2,1,1])
+
 For a full test run of all the examples included with Crisp:
 
  1. Clone the repository.
