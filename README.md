@@ -100,7 +100,7 @@ _Determinism._ If a predicate is supposed to generate only one solution, make su
     , one:quick_sort([3,2,1,3,2,1], >=, _)
     ...
 
-_Output arguments._ When output arguments may be instantiated beforehand (often prefixed with '?' in documentation), make sure to check both situations: instantiated beforehand and only validated by the predicate, and uninstantiated and then supplied by the predicate. Be sure to use exact comparisons, such as '==', when checking the generated result: in case the predicate (mistakenly) leaves the output unbound your check will succeed automatically. Example:
+_Output Arguments._ When output arguments may be instantiated beforehand (often prefixed with '?' in documentation), make sure to check both situations: instantiated beforehand and only validated by the predicate, and uninstantiated and then supplied by the predicate. Be sure to use exact comparisons, such as '==', when checking the generated result: in case the predicate (mistakenly) leaves the output unbound your check will succeed automatically. Example:
 
     ...
     , quick_sort([3,2,1,3,2,1], >=, [3,3,2,2,1,1])
