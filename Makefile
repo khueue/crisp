@@ -1,3 +1,6 @@
+# Flags: skip welcome, optimize, run goal (expects arg)
+PROLOG = swipl --quiet -O -g
+
 all: trim run_tests
 
 trim:
@@ -6,8 +9,8 @@ trim:
 
 run_tests:
 	clear
-	swipl --quiet -O -g "['lib/crisp'], ['examples/*'], crisp, halt"
+	$(PROLOG) "['lib/crisp'], ['examples/*'], crisp, halt"
 
 example:
 	clear
-	swipl --quiet -O -g "['lib/crisp'], ['examples/concatenate'], crisp, halt"
+	$(PROLOG) "['lib/crisp'], ['examples/concatenate'], crisp, halt"
