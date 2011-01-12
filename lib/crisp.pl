@@ -1,7 +1,5 @@
 %   Crisp - Crazy Simple Unit Testing in Prolog
-%
-%   MIT License (http://www.opensource.org/licenses/mit-license.php)
-%   Copyright (c) 2011, Sebastian Lundstrom.
+%   https://github.com/khueue/
 %
 %   Todo:
 %   - Numbers for failing tests? In lack of line number indication.
