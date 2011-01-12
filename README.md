@@ -8,13 +8,13 @@ Crisp is licensed under the MIT license. See LICENSE.
 
 Crisp should be compatible with at least:
 
- * SWI-Prolog 5.10.2
- * SICStus Prolog 3.12.5
- * YAP Prolog 6.2.0
+ * [SWI-Prolog](http://www.swi-prolog.org/) 5.10.2
+ * [SICStus Prolog](http://www.sics.se/sicstus/) 3.12.5
+ * [YAP Prolog](http://www.dcc.fc.up.pt/~vsc/Yap/) 6.2.0
 
 Crisp is NOT compatible with:
 
- * GNU Prolog (due to its lack of a proper module system)
+ * [GNU Prolog](http://www.gprolog.org/) (due to its lack of a proper module system)
 
 ## Quick Start
 
