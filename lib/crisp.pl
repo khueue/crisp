@@ -164,10 +164,14 @@ run_all_goals([Goal|Goals], Module, Stats0, Stats) :-
     run_all_goals(Goals, Module, Stats1, Stats).
 
 execute_deterministic_goal(Goal, Module, pass) :-
-    findall(_, Module:Goal, [_ExactlyOneSolution]),
+    executes_deterministically(Module:Goal),
     !.
 execute_deterministic_goal(_Goal, _Module, fail).
     % Not exactly one solution.
+
+executes_deterministically(Module:Goal) :-
+    setup_call_cleanup(true, Module:call(Goal), Det=true),
+    Det == true.
 
 execute_goal(Goal, Module, pass) :-
     Module:call(Goal),
