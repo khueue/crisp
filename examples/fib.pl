@@ -7,7 +7,7 @@
 %   True if NthFib is the Nth Fibonacci number, starting with base cases
 %   (0, 0) and (1, 1).
 
-test(fib/2,
+describe(fib/2,
     [ true
     , fail:fib(-1, _)
     , fib(0, 0)
@@ -27,7 +27,7 @@ fib(N, Fib) :-
 %
 %   Tail-recursive helper.
 
-test(fib/4,
+describe(fib/4,
     [ true
     , fail:fib(-1, _, _, _)
     , fib(0, 0, 1, 0)

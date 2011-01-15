@@ -9,7 +9,7 @@
 %   True if SortedList is a permutation of List such that Relation(A, B)
 %   is true for any two consecutive elements A and B in SortedList.
 
-test(selection_sort/3,
+describe(selection_sort/3,
     [ true
     , selection_sort([], _, [])
     , selection_sort([1], _, [1])
@@ -30,7 +30,7 @@ selection_sort(L, Rel, [Extremum|Sorted]) :-
 %
 %   Separates the extremum from all other elements of List.
 
-test(extract_extremum/4,
+describe(extract_extremum/4,
     [ true
     , fail:extract_extremum([], _, _, _)
     , extract_extremum([3], <, 3, [])
@@ -52,7 +52,7 @@ extract_extremum([X,Y|Xs], Rel, Extremum, [Other|Others]) :-
 %   Relates X and Y using Relation(X, Y) such that Winner is the first
 %   of X and Y that satisfies the relation, and Loser is the other.
 
-test(relate/5,
+describe(relate/5,
     [ true
     , relate(1, 2, <, 1, 2)
     , relate(1, 2, >, 2, 1)

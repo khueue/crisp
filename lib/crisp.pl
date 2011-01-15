@@ -20,7 +20,7 @@ crisp_version([0,0,1]).
 %
 %   Processes all modules in alphabetical order (except those that seem
 %   to belong to the environment, see ignored_module/1), and runs all
-%   test/2 predicates it finds. Prints test results on the fly.
+%   describe/2 predicates it finds. Prints test results on the fly.
 
 crisp :-
     write_prologue,
@@ -55,7 +55,7 @@ run_all_modules([_Module|Modules], Stats0, Stats) :-
 
 suitable_module(Module) :-
     \+ ignored_module(Module),
-    current_predicate(Module:test/2). % Some test/2 exists.
+    current_predicate(Module:describe/2). % Some describe/2 exists.
 
 before_module.
 
@@ -105,23 +105,23 @@ ignored_module(prolog).
 % Tests within module.
 
 all_tests_in_module(Module, Tests) :-
-    findall(test(Name,Goals), Module:test(Name,Goals), Tests).
+    findall(describe(Name,Goals), Module:describe(Name,Goals), Tests).
 
 run_all_tests([], _Module, Stats, Stats) :-
     !,
-    write('- No test/2 found.'), nl.
+    write('- No describe/2 found.'), nl.
 run_all_tests(Tests, Module, Stats0, Stats) :-
     run_all_tests_aux(Tests, Module, Stats0, Stats).
 
 run_all_tests_aux([], _Module, Stats, Stats).
-run_all_tests_aux([test(Name,Goals)|Tests], Module, Stats0, Stats) :-
+run_all_tests_aux([describe(Name,Goals)|Tests], Module, Stats0, Stats) :-
     before_test,
-    run_test(test(Name,Goals), Module, TestStats),
+    run_test(describe(Name,Goals), Module, TestStats),
     add_stats(Stats0, TestStats, Stats1),
     after_test,
     run_all_tests_aux(Tests, Module, Stats1, Stats).
 
-run_test(test(Name,Goals), Module, TestStats) :-
+run_test(describe(Name,Goals), Module, TestStats) :-
     write_test_name(Name),
     run_all_goals(Goals, Module, TestStats),
     write_stats(TestStats).
@@ -172,6 +172,7 @@ execute_deterministic_goal(_Goal, _Module, fail).
 
 executes_deterministically(Module:Goal) :-
     call_cleanup(Module:call(Goal), NoChoicePointsLeft = true),
+    !, % So that it does not backtrack into something deterministic.
     NoChoicePointsLeft == true.
 
 execute_goal(Goal, Module, pass) :-
@@ -265,10 +266,13 @@ tuple_to_list(Element, [Element]).
 /*
 
 all_tests_in_module(Module, Tests) :-
-    findall(test(Name,Goals), all_goals_in_test(Module, Name, Goals), Tests).
+    findall(
+        describe(Name,Goals),
+        all_goals_in_test(Module, Name, Goals),
+        Tests).
 
 all_goals_in_test(Module, Name, Goals) :-
-    clause(Module:test(Name), Tuple),
+    clause(Module:describe(Name), Tuple),
     tuple_to_list(Tuple, Goals).
 
 */

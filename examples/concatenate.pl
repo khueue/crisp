@@ -7,7 +7,7 @@
 %
 %   True if List1List2 is the list concatenation of List1 and List2.
 
-test(concatenate/3,
+describe(concatenate/3,
     [ true
     , concatenate([1,2], [3,4], [1,2,3,4])
     , concatenate([1,2], [3,4], [1])

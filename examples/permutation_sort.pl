@@ -9,7 +9,7 @@
 %   True if SortedList is a permutation of List such that Relation(A, B)
 %   is true for any two consecutive elements A and B in SortedList.
 
-test(permutation_sort/3,
+describe(permutation_sort/3,
     [ true
     , permutation_sort([], _, [])
     , permutation_sort([1], _, [1])
@@ -31,7 +31,7 @@ permutation_sort(List, Rel, Sorted) :-
 %
 %   True if Permutation is a permutation of List.
 
-test(permutation/2,
+describe(permutation/2,
     [ true
     , permutation([], [])
     , permutation([1], [1])
@@ -55,7 +55,7 @@ permutation([X|Xs], Permutation) :-
 %
 %   True if ListWithElem is List with Elem inserted somewhere.
 
-test(insert/3,
+describe(insert/3,
     [ true
     , insert([], 1, [1])
     , insert([2], 1, [1,2])
@@ -74,7 +74,7 @@ insert([X|L1], Elem, [X|L2]) :-
 %   True if Relation(A, B) is true for any two consecutive elements A and B
 %   in List.
 
-test(is_sorted/2,
+describe(is_sorted/2,
     [ true
     , is_sorted([], _)
     , is_sorted([1], _)

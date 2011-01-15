@@ -8,7 +8,7 @@
 %
 %   True if RelationPredicate(X, Y) is true.
 
-test(check/3,
+describe(check/3,
     [ true
     , check(<, 1, 2)
     , check(=<, 1, 2)

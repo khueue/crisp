@@ -9,7 +9,7 @@
 %   True if SortedList is a permutation of List such that Relation(A, B)
 %   is true for any two consecutive elements A and B in SortedList.
 
-test(insertion_sort/3,
+describe(insertion_sort/3,
     [ true
     , insertion_sort([], _, [])
     , insertion_sort([1,3,-2], <, [-2,1,3])
@@ -26,7 +26,7 @@ insertion_sort(L, Rel, S) :-
 %
 %   Uses SortedList0 to accumulate the sorted elements so far.
 
-test(insertion_sort/4,
+describe(insertion_sort/4,
     [ true
     , insertion_sort([], <, [], [])
     , insertion_sort([3,2,1,4], <, [], [1,2,3,4])
@@ -41,7 +41,7 @@ insertion_sort([X|Xs], Rel, Sorted0, Sorted) :-
 
 %   ordered_insert(+OrderedList, +X, +Relation, ?OrderedListWithX)
 
-test(ordered_insert/4,
+describe(ordered_insert/4,
     [ true
     , ordered_insert([], 1, _, [1])
     , ordered_insert([1,3], 2, <, [1,2,3])

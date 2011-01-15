@@ -9,7 +9,7 @@
 %   True if SortedList is a permutation of List such that Relation(A, B)
 %   is true for any two consecutive elements A and B in SortedList.
 
-test(quick_sort/3,
+describe(quick_sort/3,
     [ true
     , quick_sort([], _, [])
     , quick_sort([1], _, [1])
@@ -30,7 +30,7 @@ quick_sort(L, Rel, S) :-
 %   Uses SortedList0 as an accumulator that holds sorted elements that
 %   should be inserted at the end of the final result.
 
-test(quick_sort/4,
+describe(quick_sort/4,
     [ true
     , quick_sort([], <, [], [])
     , quick_sort([1], <, [], [1])
@@ -50,7 +50,7 @@ quick_sort([P|Xs], Rel, Sorted0, Sorted) :-
 %   Partitions List into Left and Right such that Relation(X, Pivot)
 %   is true for all elements X in Left.
 
-test(partition/5,
+describe(partition/5,
     [ true
     , partition([], _, _, [], [])
     , partition([1,2,3,4,5], <, 3, [1,2], [3,4,5])
