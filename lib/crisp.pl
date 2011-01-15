@@ -170,7 +170,7 @@ execute_deterministic_goal(_Goal, _Module, fail).
     % Not exactly one solution.
 
 executes_deterministically(Module:Goal) :-
-    setup_call_cleanup(true, Module:call(Goal), Det=true),
+    call_cleanup(Module:call(Goal), Det=true),
     Det == true.
 
 execute_goal(Goal, Module, pass) :-
