@@ -152,7 +152,7 @@ run_all_goals([one:Goal|Goals], Module, Stats0, Stats) :-
     run_all_goals(Goals, Module, Stats1, Stats).
 run_all_goals([fail:Goal|Goals], Module, Stats0, Stats) :-
     !,
-    execute_goal(\+(Goal), Module, Result),
+    execute_goal(\+((Goal)), Module, Result),
     write_result(Result, fail:Goal),
     update_stats(Result, Stats0, Stats1),
     run_all_goals(Goals, Module, Stats1, Stats).

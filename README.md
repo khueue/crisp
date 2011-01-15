@@ -82,7 +82,7 @@ An example goal can be anything (that is supposed to succeed), but Crisp provide
 
  * `true` - Ignored. It's just a (nasty) trick to make the remaining test cases line up nicely with the commas (see the examples).
  * `one:Goal` - Succeeds if Goal has exactly one solution and leaves no choice points.
- * `fail:Goal` - Succeeds if Goal fails. Basically the same as \\+Goal, but is much nicer to type.
+ * `fail:Goal` - Succeeds if Goal fails. Defined as just \\+((Goal)), but is much nicer to type. (Extra parentheses are needed to avoid possible ambiguity with parenthesized goals.)
 
 ### Hints for Constructing Tests
 
