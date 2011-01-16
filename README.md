@@ -86,13 +86,13 @@ An example goal can be anything (that is supposed to succeed), but Crisp provide
 
 ### Hints for Constructing Tests
 
-_Determinism._ If a predicate is supposed to generate only one solution, make sure to include an example using `one:` described above. Using underscores for output is fine, and encouraged, because it does not draw our attention to what the actual result is (other examples should check that), only that we get exactly one solution. `one:` also makes sure that no choice points are created by the goal. Example:
+__Determinism.__ If a predicate is supposed to generate only one solution, make sure to include an example using `one:` described above. Using underscores for output is fine, and encouraged, because it does not draw our attention to what the actual result is (other examples should check that), only that we get exactly one solution. `one:` also makes sure that no choice points are created by the goal. Example:
 
     ...
     , one:quick_sort([3,2,1,3,2,1], >=, _)
     ...
 
-_Output Arguments._ When output arguments may be instantiated beforehand (often prefixed with '?' in documentation), make sure to check both situations: instantiated beforehand and only validated by the predicate, and uninstantiated and then supplied by the predicate. Be sure to use exact comparisons, such as `==`, when checking the generated result: if you use simple equals, `=`, and the predicate (mistakenly) fails to bind the output, your check will always succeed. Example:
+__Output Arguments.__ When output arguments may be instantiated beforehand (often prefixed with '?' in documentation), make sure to check both situations: instantiated beforehand and only validated by the predicate, and uninstantiated and then supplied by the predicate. Be sure to use exact comparisons, such as `==`, when checking the generated result: if you use simple equals, `=`, and the predicate (mistakenly) fails to bind the output, your check will always succeed. Example:
 
     ...
     , quick_sort([3,2,1,3,2,1], >=, [3,3,2,2,1,1])
