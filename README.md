@@ -86,7 +86,7 @@ An example goal can be anything (that is supposed to succeed), but Crisp provide
 
 ### Hints for Constructing Tests
 
-_Determinism._ If a predicate is supposed to generate only one solution, make sure to include an example using `one:` described above. Using underscores for output is fine, and encouraged, because it does not draw our attention to what the actual result is (other examples should check that), only that we get exactly one solution. It also makes sure that no choice points are created by the goal. Example:
+_Determinism._ If a predicate is supposed to generate only one solution, make sure to include an example using `one:` described above. Using underscores for output is fine, and encouraged, because it does not draw our attention to what the actual result is (other examples should check that), only that we get exactly one solution. `one:` also makes sure that no choice points are created by the goal. Example:
 
     ...
     , one:quick_sort([3,2,1,3,2,1], >=, _)
