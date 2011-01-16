@@ -172,7 +172,6 @@ execute_deterministic_goal(_Goal, _Module, fail).
 
 executes_deterministically(Module:Goal) :-
     call_cleanup(Module:call(Goal), NoChoicePointsLeft = true),
-    !, % So that it does not backtrack into something deterministic.
     NoChoicePointsLeft == true.
 
 execute_goal(Goal, Module, pass) :-
