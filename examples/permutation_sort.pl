@@ -20,6 +20,7 @@ describe(permutation_sort/3,
     , permutation_sort([3,2,1,3,2,1], >=, [3,3,2,2,1,1])
     , (permutation_sort([3,2,1,3,2,1], >=, S1), S1 == [3,3,2,2,1,1])
     , one:permutation_sort([3,2,1,3,2,1], >=, _)
+    , onedet:permutation_sort([3,2,1,3,2,1], >=, _)
     ]).
 
 permutation_sort(List, Rel, Sorted) :-
@@ -82,6 +83,7 @@ describe(is_sorted/2,
     , is_sorted([1,2,3], <)
     , is_sorted([1,2,3,3], =<)
     , one:is_sorted([1,2,3,3,3], =<)
+    , onedet:is_sorted([1,2,3,3,3], =<)
     , fail:is_sorted([1,2,3,3,2], =<)
     ]).
 

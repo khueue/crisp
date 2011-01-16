@@ -54,6 +54,7 @@ Then sprinkle your code with describe/2 predicates, where the first argument is 
         , concatenate([1,2], [3,4], [1,2,3,4])
         , concatenate([1,2], [3,4], [1])
         , one:concatenate([1,2], [3,4], _)
+        , onedet:concatenate([1,2], [3,4], _)
         , fail:concatenate([1,2], [3,4], [3,4,1,2])
         ]).
 
@@ -69,9 +70,9 @@ When your files are loaded, simply call `crisp` to run all tests:
     Module: concatenate
     - concatenate/3
       !!! FAIL: concatenate([1,2],[3,4],[1])
-      => 1/4 fail, 3/4 pass
+      => 1/5 fail, 4/5 pass
 
-    Summary: 1/4 fail, 3/4 pass
+    Summary: 1/5 fail, 4/5 pass
     true.
 
 ## Miscellaneous
@@ -82,8 +83,8 @@ An example goal can be anything (that is supposed to succeed), but Crisp provide
 
  * `true` - Ignored. It's just a (nasty) trick to make the remaining test cases line up nicely with the commas (see the examples).
  * `one:Goal` - Succeeds if Goal has exactly one solution. Useful to ensure that the predicate only generates the correct answer.
- * `onedet:Goal` - Same as `one:`, but also asserts that Goal leaves no choice points. Useful when adding cuts to prune away unnecessary backtracking.
- * `fail:Goal` - Succeeds if Goal fails. Defined as just `\+ Goal`, but is much nicer to type.
+ * `onedet:Goal` - Same as `one:`, but also asserts that Goal leaves no choice points (deterministic). Useful when adding cuts to prune away unnecessary backtracking.
+ * `fail:Goal` - Succeeds if Goal fails. Defined as just `\+ Goal` but is much nicer to type.
 
 ### Hints for Constructing Tests
 

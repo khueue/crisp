@@ -12,6 +12,7 @@ describe(concatenate/3,
     , concatenate([1,2], [3,4], [1,2,3,4])
     , concatenate([1,2], [3,4], [1])
     , one:concatenate([1,2], [3,4], _)
+    , onedet:concatenate([1,2], [3,4], _)
     , fail:concatenate([1,2], [3,4], [3,4,1,2])
     ]).
 

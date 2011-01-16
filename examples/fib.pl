@@ -18,6 +18,7 @@ describe(fib/2,
     , fib(5, 5)
     , fib(6, 8)
     , one:fib(6, _)
+    , onedet:fib(6, _)
     ]).
 
 fib(N, Fib) :-
@@ -38,6 +39,7 @@ describe(fib/4,
     , fib(5, 0, 1, 5)
     , fib(6, 0, 1, 8)
     , one:fib(6, 0, 1, _)
+    , onedet:fib(6, 0, 1, _)
     ]).
 
 fib(0, Fib, _, Fib) :- !.

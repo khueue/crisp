@@ -19,6 +19,7 @@ describe(selection_sort/3,
     , selection_sort([1,2,3,1,2,3], >=, [3,3,2,2,1,1])
     , selection_sort([3,2,1,3,2,1], >=, [3,3,2,2,1,1])
     , one:selection_sort([3,2,1,3,2,1], >=, _)
+    , onedet:selection_sort([3,2,1,3,2,1], >=, _)
     ]).
 
 selection_sort([], _, []) :- !.
@@ -40,6 +41,7 @@ describe(extract_extremum/4,
     , extract_extremum([1,2,3,4,5,6], <, 1, [2,3,4,5,6])
     , extract_extremum([5,2,4,0,1,3], <, 0, [5,2,4,1,3])
     , one:extract_extremum([5,5,5,5], =<, _, _)
+    , onedet:extract_extremum([5,5,5,5], =<, _, _)
     ]).
 
 extract_extremum([Extremum], _, Extremum, []) :- !.
@@ -59,6 +61,7 @@ describe(relate/5,
     , relate(2, 2, >=, 2, 2)
     , relate(2, 2, >, 2, 2)
     , one:relate(1, 1, >=, _, _)
+    , onedet:relate(1, 1, >=, _, _)
     ]).
 
 relate(Winner, Loser, Rel, Winner, Loser) :-

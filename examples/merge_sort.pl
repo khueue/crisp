@@ -15,6 +15,7 @@ describe(merge_sort/3,
     , (merge_sort([4,2,3,1,-1], <, S1), S1 == [-1,1,2,3,4])
     , (merge_sort([4,2,3,1,-1], >=, S2), S2 == [4,3,2,1,-1])
     , one:merge_sort([4,2,3,1,-1], >=, _)
+    , onedet:merge_sort([4,2,3,1,-1], >=, _)
     ]).
 
 merge_sort([], _, []) :- !.
@@ -38,7 +39,7 @@ describe(split/3,
     , (split([1,2,3,4], L1, L2), L1 == [1,3], L2 == [2,4])
     , (split(L, [1,3], [2,4]), L == [1,2,3,4])
     , one:split([1,2,3,4], _, _)
-    , one:split([1,2,3,4,5], _, _)
+    , onedet:split([1,2,3,4,5], _, _)
     ]).
 
 split([], [], []) :- !.
