@@ -140,14 +140,21 @@ after_test.
 run_all_goals(Goals, Module, Stats) :-
     run_all_goals(Goals, Module, stats(0,0), Stats).
 
+% Todo: Not DRY whatsoever.
 run_all_goals([], _Module, Stats, Stats).
 run_all_goals([true|Goals], Module, Stats0, Stats) :-
     !,
     run_all_goals(Goals, Module, Stats0, Stats).
 run_all_goals([one:Goal|Goals], Module, Stats0, Stats) :-
     !,
-    execute_deterministic_goal(Goal, Module, Result),
+    execute_one_goal(Goal, Module, Result),
     write_result(Result, one:Goal),
+    update_stats(Result, Stats0, Stats1),
+    run_all_goals(Goals, Module, Stats1, Stats).
+run_all_goals([onedet:Goal|Goals], Module, Stats0, Stats) :-
+    !,
+    execute_onedet_goal(Goal, Module, Result),
+    write_result(Result, onedet:Goal),
     update_stats(Result, Stats0, Stats1),
     run_all_goals(Goals, Module, Stats1, Stats).
 run_all_goals([fail:Goal|Goals], Module, Stats0, Stats) :-
@@ -163,16 +170,25 @@ run_all_goals([Goal|Goals], Module, Stats0, Stats) :-
     update_stats(Result, Stats0, Stats1),
     run_all_goals(Goals, Module, Stats1, Stats).
 
-execute_deterministic_goal(Goal, Module, pass) :-
-    findall(_, Module:call(Goal), [_ExactlyOneSolution]),
-    executes_deterministically(Module:Goal),
+execute_one_goal(Goal, Module, pass) :-
+    exactly_one_solution(Module:Goal),
     !.
-execute_deterministic_goal(_Goal, _Module, fail).
+execute_one_goal(_Goal, _Module, fail).
     % Not exactly one solution.
 
-executes_deterministically(Module:Goal) :-
-    call_cleanup(Module:call(Goal), NoChoicePointsLeft = true),
-    NoChoicePointsLeft == true.
+execute_onedet_goal(Goal, Module, pass) :-
+    exactly_one_solution(Module:Goal),
+    leaves_no_choice_points(Module:Goal),
+    !.
+execute_onedet_goal(_Goal, _Module, fail).
+    % Not exactly one solution or leaves choices.
+
+exactly_one_solution(Module:Goal) :-
+    findall(_, Module:call(Goal), [_]).
+
+leaves_no_choice_points(Module:Goal) :-
+    call_cleanup(Module:call(Goal), LeftNoChoicePoints = true),
+    LeftNoChoicePoints == true.
 
 execute_goal(Goal, Module, pass) :-
     Module:call(Goal),
