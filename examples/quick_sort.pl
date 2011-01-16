@@ -71,3 +71,27 @@ partition([X|Xs], Rel, P, [X|Smalls], Bigs) :-
 partition([X|Xs], Rel, P, Smalls, [X|Bigs]) :-
     % \+ check(Rel, X, P),
     partition(Xs, Rel, P, Smalls, Bigs).
+
+%%  quick_sort_dcg(+List, +Relation, ?SortedListWithEnd, ?End)
+%
+%   Same specification as quick_sort/4 except for this:
+%
+%   This predicate is implemented using Definite Clause Grammar (DCG),
+%   so the last two arguments are added upon compile-time and represent
+%   difference lists: End is bound to the end of SortedListWithEnd.
+
+describe(quick_sort_dcg/4,
+    [ true
+    , quick_sort_dcg([], <, [], [])
+    , quick_sort_dcg([1], <, [1|E1], E1)
+    , quick_sort_dcg([4,9,2,4,5,6,7], <, [2,4,4,5,6,7,9|E2], E2)
+    , quick_sort_dcg([3,1,2,4,5,c,a,b], @>, [c,b,a,5,4,3,2,1|E3], E3)
+    , one:quick_sort_dcg([3,1,2,4,5,c,a,b], @>, _, _)
+    ]).
+
+quick_sort_dcg([], _) --> [].
+quick_sort_dcg([X|Xs], Rel) -->
+    { partition(Xs, Rel, X, Left, Right) },
+    quick_sort_dcg(Left, Rel),
+    [X],
+    quick_sort_dcg(Right, Rel).
