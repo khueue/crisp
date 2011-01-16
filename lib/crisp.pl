@@ -2,11 +2,12 @@
 %   https://github.com/khueue/
 %
 %   Todo:
-%   - Numbers for failing tests? In lack of line number indication.
+%   - Numbers for failing examples? In lack of line number indication.
 %   - Look into copy_term/2 for solving the problem of tying up all
 %     variables in a goal list. Or is that good behavior?
 %   - Redisplay failing tests at end of report.
 %   - Run only certain tests.
+%   - Make first element of goal list label of description instead of arg 1?
 
 :- module(crisp, [crisp/0, crisp_version/1]).
 
