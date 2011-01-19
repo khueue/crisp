@@ -82,9 +82,9 @@ When your files are loaded, simply call `crisp` to run all tests:
 An example goal can be anything (that is supposed to succeed), but Crisp provides the following syntactic sugar for convenience and readability:
 
  * `true` - Ignored. It's just a (nasty) trick to make the remaining test cases line up nicely with the commas (see the examples).
- * `one:Goal` - Succeeds if Goal has exactly one solution. Useful to ensure that the predicate only generates the correct answer.
- * `onedet:Goal` - Same as `one:`, but also asserts that Goal leaves no choice points (deterministic). Useful when adding cuts to prune away unnecessary backtracking.
- * `fail:Goal` - Succeeds if Goal fails. Defined as just `\+ Goal` but is much nicer to type.
+ * `one:Goal` - Succeeds if _Goal_ has exactly one solution. Useful to ensure that the predicate only generates the correct answer.
+ * `onedet:Goal` - Same as `one:`, but also asserts that _Goal_ leaves no choice points (deterministic). Useful when adding cuts to prune away unnecessary backtracking.
+ * `fail:Goal` - Succeeds if _Goal_ fails. Defined as just `\+ Goal` but is much nicer to type.
 
 ### Hints for Constructing Tests
 
