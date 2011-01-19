@@ -19,8 +19,8 @@ describe(quick_sort/3,
     , quick_sort([1,2,3,1,2,3], >=, [3,3,2,2,1,1])
     , quick_sort([3,2,1,3,2,1], >=, [3,3,2,2,1,1])
     , (quick_sort([3,2,1,3,2,1], >=, S1), S1 == [3,3,2,2,1,1])
-    , one:quick_sort([3,2,1,3,2,1], >=, _)
-    , onedet:quick_sort([3,2,1,3,2,1], >=, _)
+    , one-quick_sort([3,2,1,3,2,1], >=, _)
+    , onedet-quick_sort([3,2,1,3,2,1], >=, _)
     ]).
 
 quick_sort(L, Rel, S) :-
@@ -61,8 +61,8 @@ describe(partition/5,
     , partition([1,1,1], =<, 1, [1,1,1], [])
     , partition([1,1,1], >=, 1, [1,1,1], [])
     , partition([1,1,1], >, 1, [], [1,1,1])
-    , one:partition([1,1,1], >, 1, _, _)
-    , onedet:partition([1,1,1], >, 1, _, _)
+    , one-partition([1,1,1], >, 1, _, _)
+    , onedet-partition([1,1,1], >, 1, _, _)
     ]).
 
 partition([], _, _, [], []).
@@ -88,8 +88,8 @@ describe(quick_sort_dcg/4,
     , quick_sort_dcg([1], <, [1|E1], E1)
     , quick_sort_dcg([4,9,2,4,5,6,7], <, [2,4,4,5,6,7,9|E2], E2)
     , quick_sort_dcg([3,1,2,4,5,c,a,b], @>, [c,b,a,5,4,3,2,1|E3], E3)
-    , one:quick_sort_dcg([3,1,2,4,5,c,a,b], @>, _, _)
-    , onedet:quick_sort_dcg([3,1,2,4,5,c,a,b], @>, _, _)
+    , one-quick_sort_dcg([3,1,2,4,5,c,a,b], @>, _, _)
+    , onedet-quick_sort_dcg([3,1,2,4,5,c,a,b], @>, _, _)
     ]).
 
 quick_sort_dcg([], _) --> [].

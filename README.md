@@ -53,9 +53,9 @@ Then sprinkle your code with describe/2 predicates, where the first argument is 
         [ true
         , concatenate([1,2], [3,4], [1,2,3,4])
         , concatenate([1,2], [3,4], [1])
-        , one:concatenate([1,2], [3,4], _)
-        , onedet:concatenate([1,2], [3,4], _)
-        , fail:concatenate([1,2], [3,4], [3,4,1,2])
+        , one-concatenate([1,2], [3,4], _)
+        , onedet-concatenate([1,2], [3,4], _)
+        , fail-concatenate([1,2], [3,4], [3,4,1,2])
         ]).
 
     concatenate([], L, L).
@@ -82,17 +82,17 @@ When your files are loaded, simply call `crisp` to run all tests:
 An example goal can be anything (that is supposed to succeed), but Crisp provides the following syntactic sugar for convenience and readability:
 
  * `true` - Ignored. It's just a (nasty) trick to make the remaining test cases line up nicely with the commas (see the examples).
- * `one:Goal` - Succeeds if _Goal_ has exactly one solution. Useful to ensure that the predicate only generates the correct answer.
- * `onedet:Goal` - Same as `one:`, but also asserts that _Goal_ leaves no choice points (deterministic). Useful when adding cuts to prune away unnecessary backtracking.
- * `fail:Goal` - Succeeds if _Goal_ fails. Defined as just `\+ Goal` but is much nicer to type.
+ * `one-Goal` - Succeeds if _Goal_ has exactly one solution. Useful to ensure that the predicate only generates the correct answer.
+ * `onedet-Goal` - Same as `one-`, but also asserts that _Goal_ leaves no choice points (deterministic). Useful when adding cuts to prune away unnecessary backtracking.
+ * `fail-Goal` - Succeeds if _Goal_ fails. Defined as just `\+ Goal` but is much nicer to type.
 
 ### Hints for Constructing Tests
 
-__Determinism.__ If a predicate is supposed to generate only one solution, make sure to include an example using `one:` described above. Using underscores for output is fine, and encouraged, because it does not draw our attention to what the actual result is (other examples should check that), only that we get exactly one solution. If you like to add cuts to remove redundant backtracking you should also add an identical `onedet:` goal. Example:
+__Determinism.__ If a predicate is supposed to generate only one solution, make sure to include an example using `one-` described above. Using underscores for output is fine, and encouraged, because it does not draw our attention to what the actual result is (other examples should check that), only that we get exactly one solution. If you like to add cuts to remove redundant backtracking you should also add an identical `onedet-` goal. Example:
 
     ...
-    , one:quick_sort([3,2,1,3,2,1], >=, _)
-    , onedet:quick_sort([3,2,1,3,2,1], >=, _)
+    , one-quick_sort([3,2,1,3,2,1], >=, _)
+    , onedet-quick_sort([3,2,1,3,2,1], >=, _)
     ...
 
 __Output Arguments.__ When output arguments may be instantiated beforehand (often prefixed with '?' in documentation), make sure to check both situations: instantiated beforehand and only validated by the predicate, and uninstantiated and then supplied by the predicate. Be sure to use exact comparisons, such as `==`, when checking the generated result: if you use simple equals, `=`, and the predicate (mistakenly) fails to bind the output, your check will always succeed. Example:

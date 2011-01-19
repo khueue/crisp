@@ -146,22 +146,22 @@ run_all_goals([], _Module, Stats, Stats).
 run_all_goals([true|Goals], Module, Stats0, Stats) :-
     !,
     run_all_goals(Goals, Module, Stats0, Stats).
-run_all_goals([one:Goal|Goals], Module, Stats0, Stats) :-
+run_all_goals([one-Goal|Goals], Module, Stats0, Stats) :-
     !,
     execute_one_goal(Goal, Module, Result),
-    write_result(Result, one:Goal),
+    write_result(Result, one-Goal),
     update_stats(Result, Stats0, Stats1),
     run_all_goals(Goals, Module, Stats1, Stats).
-run_all_goals([onedet:Goal|Goals], Module, Stats0, Stats) :-
+run_all_goals([onedet-Goal|Goals], Module, Stats0, Stats) :-
     !,
     execute_onedet_goal(Goal, Module, Result),
-    write_result(Result, onedet:Goal),
+    write_result(Result, onedet-Goal),
     update_stats(Result, Stats0, Stats1),
     run_all_goals(Goals, Module, Stats1, Stats).
-run_all_goals([fail:Goal|Goals], Module, Stats0, Stats) :-
+run_all_goals([fail-Goal|Goals], Module, Stats0, Stats) :-
     !,
     execute_goal(\+ Goal, Module, Result),
-    write_result(Result, fail:Goal),
+    write_result(Result, fail-Goal),
     update_stats(Result, Stats0, Stats1),
     run_all_goals(Goals, Module, Stats1, Stats).
 run_all_goals([Goal|Goals], Module, Stats0, Stats) :-

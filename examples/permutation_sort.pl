@@ -15,12 +15,12 @@ describe(permutation_sort/3,
     , permutation_sort([1], _, [1])
     , permutation_sort([1,2,3,4,5], <, [1,2,3,4,5])
     , permutation_sort([5,4,3,2,1], <, [1,2,3,4,5])
-    , fail:permutation_sort([1,1,1,1,1], <, [1,1,1,1,1]) % Fails is_sorted!
+    , fail-permutation_sort([1,1,1,1,1], <, [1,1,1,1,1]) % Fails is_sorted!
     , permutation_sort([1,2,3,1,2,3], >=, [3,3,2,2,1,1])
     , permutation_sort([3,2,1,3,2,1], >=, [3,3,2,2,1,1])
     , (permutation_sort([3,2,1,3,2,1], >=, S1), S1 == [3,3,2,2,1,1])
-    , one:permutation_sort([3,2,1,3,2,1], >=, _)
-    , onedet:permutation_sort([3,2,1,3,2,1], >=, _)
+    , one-permutation_sort([3,2,1,3,2,1], >=, _)
+    , onedet-permutation_sort([3,2,1,3,2,1], >=, _)
     ]).
 
 permutation_sort(List, Rel, Sorted) :-
@@ -82,9 +82,9 @@ describe(is_sorted/2,
     , is_sorted([1,2], <)
     , is_sorted([1,2,3], <)
     , is_sorted([1,2,3,3], =<)
-    , one:is_sorted([1,2,3,3,3], =<)
-    , onedet:is_sorted([1,2,3,3,3], =<)
-    , fail:is_sorted([1,2,3,3,2], =<)
+    , one-is_sorted([1,2,3,3,3], =<)
+    , onedet-is_sorted([1,2,3,3,3], =<)
+    , fail-is_sorted([1,2,3,3,2], =<)
     ]).
 
 is_sorted([], _).
