@@ -11,3 +11,5 @@
 %   (preferably next to the predicate under test).
 
 :- discontiguous describe/2.
+
+:- use_module('../utils').

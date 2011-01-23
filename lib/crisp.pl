@@ -8,6 +8,8 @@
 %   - Redisplay failing tests at end of report.
 %   - Run only certain tests.
 %   - Make first element of goal list label of description instead of arg 1?
+%   - Enable recursive syntax: fail-tail-Goal.
+%   - Plug-in system for user-defined syntax?
 
 :- module(crisp, [crisp/0, crisp_version/1]).
 
@@ -164,6 +166,12 @@ run_all_goals([fail-Goal|Goals], Module, Stats0, Stats) :-
     write_result(Result, fail-Goal),
     update_stats(Result, Stats0, Stats1),
     run_all_goals(Goals, Module, Stats1, Stats).
+run_all_goals([tail-Goal|Goals], Module, Stats0, Stats) :-
+    !,
+    execute_tail_goal(Goal, Module, Result),
+    write_result(Result, tail-Goal),
+    update_stats(Result, Stats0, Stats1),
+    run_all_goals(Goals, Module, Stats1, Stats).
 run_all_goals([Goal|Goals], Module, Stats0, Stats) :-
     % Goal has no special form.
     execute_goal(Goal, Module, Result),
@@ -190,6 +198,12 @@ exactly_one_solution(Module:Goal) :-
 leaves_no_choice_points(Module:Goal) :-
     call_cleanup(Module:call(Goal), LeftNoChoicePoints = true),
     LeftNoChoicePoints == true.
+
+execute_tail_goal(Goal, Module, pass) :-
+    tail_recursive(Module:Goal),
+    !.
+execute_tail_goal(_Goal, _Module, fail).
+    % Does not seem to be tail-recursive.
 
 execute_goal(Goal, Module, pass) :-
     Module:call(Goal),
@@ -267,6 +281,46 @@ write_version_list([X|Xs]) :-
 
 write_epilogue.
 
+tail_recursive(Goal) :-
+    garbage_collect,
+    statistics(trailused, Stack0),
+    call(Goal),
+    statistics(trailused, Stack1),
+    Stack is Stack1 - Stack0,
+    seems_tail_recursive(Stack),
+    !. % The first solution is enough.
+
+seems_tail_recursive(Stack) :-
+    Stack < 50. % Very arbitrary. Sticking with "small enough".
+
+/*
+
+tail_recursive(Goal) :-
+    tail_recursive(Goal, true).
+
+tail_recursive(Goal, Setup) :-
+    call(Setup),
+    garbage_collect,
+    statistics(trailused, Stack0),
+    call(Goal),
+    statistics(trailused, Stack1),
+    format('Trail stack before: ~d bytes~n', Stack0),
+    format('Trail stack after: ~d bytes~n', Stack1),
+    Stack is Stack1 - Stack0,
+    format(
+        'Stack difference: ~d - ~d = ~d bytes~n',
+        [Stack1, Stack0, Stack]),
+    verdict(Stack),
+    !. % The first solution is enough.
+
+verdict(Stack) :-
+    Stack < 50, % Very arbitrary. Sticking with "small enough".
+    !,
+    format('Most likely tail-recursive.~n').
+verdict(_) :-
+    format('Probably not tail-recursive. But who knows.~n').
+
+*/
 /*
 
 % Think long and hard about this:

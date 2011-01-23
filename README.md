@@ -2,7 +2,7 @@
 
 Crisp is a tiny unit testing tool designed for ease of use and simplicity. It is basically just a wrapper around a very basic idea: keeping small and simple tests close to the code at hand.
 
-## Philosophy
+## Motivation
 
 Tests are thought of as descriptions of how the code is supposed to behave, so we think of a set of tests for a predicate as a "description", and the goals within that description as "examples". This notion, together with the fact that descriptions are (usually) placed right next to the actual code makes for good (executable) documentation.
 
@@ -45,14 +45,14 @@ Then sprinkle your code with describe/2 predicates, where the first argument is 
     :- include('../lib/crisp_includes').
 
     %%  concatenate(+List1, +List2, ?List1List2)
-    %   concatenate(?List1, ?List2, +List1List2)
     %
     %   True if List1List2 is the list concatenation of List1 and List2.
 
     describe(concatenate/3,
         [ true
         , concatenate([1,2], [3,4], [1,2,3,4])
-        , concatenate([1,2], [3,4], [1])
+        , concatenate([1,2], [3,4], L1), L1 == [1,2,3,4]
+        , concatenate([1,2], [3,4], [1,2,34]) % Whoops...
         , one-concatenate([1,2], [3,4], _)
         , onedet-concatenate([1,2], [3,4], _)
         , fail-concatenate([1,2], [3,4], [3,4,1,2])
@@ -69,10 +69,10 @@ When your files are loaded, simply call `crisp` to run all tests:
 
     Module: concatenate
     - concatenate/3
-      !!! FAIL: concatenate([1,2],[3,4],[1])
-      => 1/5 fail, 4/5 pass
+      !!! FAIL: concatenate([1,2],[3,4],[1,2,34])
+      => 1/7 fail, 6/7 pass
 
-    Summary: 1/5 fail, 4/5 pass
+    Summary: 1/7 fail, 6/7 pass
     true.
 
 ## Miscellaneous
@@ -88,7 +88,7 @@ An example goal can be anything (that is supposed to succeed), but Crisp provide
 
 ### Hints for Constructing Tests
 
-__Determinism.__ If a predicate is supposed to generate only one solution, make sure to include an example using `one-` described above. Using underscores for output is fine, and encouraged, because it does not draw our attention to what the actual result is (other examples should check that), only that we get exactly one solution. If you like to add cuts to remove redundant backtracking you should also add an identical `onedet-` goal. Example:
+__Determinism.__ If a predicate is supposed to generate only one solution for a given input, make sure to include an example using `one-` described above. Using underscores for output is fine, and encouraged, because it does not draw our attention to what the actual result is (other examples should check that), only that we get exactly one solution. If you like to add cuts to remove redundant backtracking you should also add an identical `onedet-` goal. Example:
 
     ...
     , one-quick_sort([3,2,1,3,2,1], >=, _)
