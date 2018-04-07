@@ -1,4 +1,7 @@
-:- module(quick_sort, [quick_sort/3, quick_sort_dcg/4]).
+:- module(_, [
+    quick_sort/3,
+    quick_sort_dcg/4
+]).
 
 :- use_module('sort_utils').
 

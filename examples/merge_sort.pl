@@ -1,4 +1,6 @@
-:- module(merge_sort, [merge_sort/3]).
+:- module(_, [
+    merge_sort/3
+]).
 
 :- use_module('sort_utils').
 

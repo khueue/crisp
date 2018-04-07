@@ -1,4 +1,6 @@
-:- module(selection_sort, [selection_sort/3]).
+:- module(_, [
+    selection_sort/3
+]).
 
 :- use_module('sort_utils').
 

@@ -11,7 +11,10 @@
 %   - Enable recursive syntax: fail-tail-Goal.
 %   - Plug-in system for user-defined syntax?
 
-:- module(crisp, [crisp/0, crisp_version/1]).
+:- module(crisp, [
+    crisp/0,
+    crisp_version/1
+]).
 
 %%  crisp_version(?VersionAsList)
 %

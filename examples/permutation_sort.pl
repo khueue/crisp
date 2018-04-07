@@ -1,4 +1,6 @@
-:- module(permutation_sort, [permutation_sort/3]).
+:- module(_, [
+    permutation_sort/3
+]).
 
 :- use_module('sort_utils').
 

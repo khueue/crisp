@@ -1,4 +1,6 @@
-:- module(fib, [fib/2]).
+:- module(_, [
+    fib/2
+]).
 
 :- include('../lib/crisp_includes').
 

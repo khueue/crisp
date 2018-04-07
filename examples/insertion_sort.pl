@@ -1,4 +1,6 @@
-:- module(insertion_sort, [insertion_sort/3]).
+:- module(_, [
+    insertion_sort/3
+]).
 
 :- use_module('sort_utils').
 
