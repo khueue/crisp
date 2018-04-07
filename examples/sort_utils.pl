@@ -1,6 +1,8 @@
 %   Utilities used by sorting routines.
 
-:- module(sort_utils, [check/3]).
+:- module(_, [
+    check/3
+]).
 
 :- include('../lib/crisp_includes').
 
